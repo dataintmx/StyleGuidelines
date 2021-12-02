@@ -9,17 +9,17 @@
     - [3.1.2. Nombre](#312-nombre)
     - [3.1.3. Estructura](#313-estructura)
     - [3.1.4. Copyright](#314-copyright)
-    - [3.1.5. Caracteres fuera de la especificación ASCII](#315-caracteres-fuera-de-la-especificación-ascii)
-    - [3.1.6. Caracteres especiales](#316-caracteres-especiales)
-    - [3.1.7. Final de archivo](#317-final-de-archivo)
+    - [3.1.5. Final de archivo](#315-final-de-archivo)
   - [3.2. Disposición del código](#32-disposición-del-código)
     - [3.2.1. Longitud máxima de línea](#321-longitud-máxima-de-línea)
     - [3.2.2. Líneas en blanco](#322-líneas-en-blanco)
     - [3.2.3. Sangrado (_indentation_) y tabulación](#323-sangrado-indentation-y-tabulación)
   - [3.3. Estilo de código](#33-estilo-de-código)
-    - [3.3.1. Comentarios y documentación en código](#331-comentarios-y-documentación-en-código)
-      - [3.3.1.1. Comentarios](#3311-comentarios)
-      - [3.3.1.2. Documentación en código (_docstring_)](#3312-documentación-en-código-docstring)
+    - [3.3.1. Caracteres fuera de la especificación ASCII](#331-caracteres-fuera-de-la-especificación-ascii)
+    - [3.3.2. Caracteres especiales](#332-caracteres-especiales)
+    - [3.3.3. Comentarios y documentación en código](#333-comentarios-y-documentación-en-código)
+      - [3.3.3.1. Comentarios](#3331-comentarios)
+      - [3.3.3.2. Documentación en código (_docstring_)](#3332-documentación-en-código-docstring)
 
 # 1. Introducción
 
@@ -124,43 +124,7 @@ El programador deberá sustituir `{year}` con el año de la primer implementaci�
 
 **Es importante recordar que, en esta sección, cuando se habla de reutilización de código de terceros, se hace referencia a la redistribución de código.** Es decir, **si el programador importa librerías o paqueterías de terceros (sin importar la licencia bajo a cual se distribuyen), éste no está redistribuyendo código** y, por lo tanto, no es necesario hacer las respectivas atribuciones a sus autores originales y DataInt puede declarar que todos los derechos de propiedad intelectual le pertenecen. Sin embargo, si el programador copia código contenido en una librería distribuida por terceros (para hacerle modificaciones o mantenerlo íntegro), es necesario hacer las respectivas atribuciones y declarar que DataInt sólo mantiene algunos derechos de propiedad intelectual.
 
-### 3.1.5. Caracteres fuera de la especificación ASCII
-
-Si en cualquier parte del archivo el programador requiere usar caracteres fuera de la especificación ascii (como caracteres pertenecientes a alfabetos distintos al latino), el programador deberá escribirlo explícitamente y deberá evitar el uso de secuencias hexadecimales o códigos unicode con escape de texto.
-
-**Correcto** :white_check_mark:
-
-```js
-// Explicit use of the greek letter 'mu'
-const unidades = "μm";
-```
-
-**Incorrecto** :x:
-
-```js
-// Don't use escaped hexadecimal or unicode
-const unidades = "\u03bcm";
-```
-
-### 3.1.6. Caracteres especiales
-
-Si en cualquier parte del archivo el programador requiere usar caracteres especiales (como saltos de línea, tabulaciones, espacios en blanco, etc.), el programador deberá hacer uso de la secuencia de escape tradicional (`\"`, `\s`, `\t`, `\v`, etc.) en lugar de secuencias hexadecimales o códigos unicode con escape de texto.
-
-**Correcto** :white_check_mark:
-
-```js
-// Always use the 'traditional' escaped character
-const título = "Incidencia Delictiva\nMarzo de 2020";
-```
-
-**Incorrecto** :x:
-
-```js
-// Don't use the ascii escaped codes
-const título = "Incidencia Delictiva\x0aMarzo de 2020";
-```
-
-### 3.1.7. Final de archivo
+### 3.1.5. Final de archivo
 
 Todos los archivos deberán terminar con un salto de línea (`\n`) o, en su defecto, un retorno de carro con nueva línea (`\rn`). 
 
@@ -254,9 +218,45 @@ Cada vez que se abre un nuevo bloque de código, se incrementa el sangrado en 4 
 
 ## 3.3. Estilo de código
 
-### 3.3.1. Comentarios y documentación en código
+### 3.3.1. Caracteres fuera de la especificación ASCII
 
-#### 3.3.1.1. Comentarios
+Si en cualquier parte del código el programador requiere usar caracteres fuera de la especificación ascii (como caracteres pertenecientes a alfabetos distintos al latino), el programador deberá escribirlo explícitamente y deberá evitar el uso de secuencias hexadecimales o códigos unicode con escape de texto.
+
+**Correcto** :white_check_mark:
+
+```js
+// Explicit use of the greek letter 'mu'
+const unidades = "μm";
+```
+
+**Incorrecto** :x:
+
+```js
+// Don't use escaped hexadecimal or unicode
+const unidades = "\u03bcm";
+```
+
+### 3.3.2. Caracteres especiales
+
+Si en cualquier parte del archivo el programador requiere usar caracteres especiales (como saltos de línea, tabulaciones, espacios en blanco, etc.), el programador deberá hacer uso de la secuencia de escape tradicional (`\"`, `\s`, `\t`, `\v`, etc.) en lugar de secuencias hexadecimales o códigos unicode con escape de texto.
+
+**Correcto** :white_check_mark:
+
+```js
+// Always use the 'traditional' escaped character
+const título = "Incidencia Delictiva\nMarzo de 2020";
+```
+
+**Incorrecto** :x:
+
+```js
+// Don't use the ascii escaped codes
+const título = "Incidencia Delictiva\x0aMarzo de 2020";
+```
+
+### 3.3.3. Comentarios y documentación en código
+
+#### 3.3.3.1. Comentarios
 
 Todo el código debe comentarse. El programador siempre debe tener en mente que debe dejar una nota describiendo qué hacen sus funciones, declaraciones, clases, métodos e importaciones, siempre que éstas no sean explícitas y descriptivas. Estas notas deben ser suficientemente claras para que, otros colaboradores del proyecto (dentro y fuera de DataInt), puedan entender el código que están leyendo.
 
@@ -289,7 +289,7 @@ Cras in feugiat arcu. In vehicula est ligula, eu efficitur libero aliquam vel.
 /* Don't use block comment notation for single line comments! */
 ```
 
-#### 3.3.1.2. Documentación en código (_docstring_)
+#### 3.3.3.2. Documentación en código (_docstring_)
 
 En idiomas de programación que permiten el uso de _docstrings_, o cadenas de documentación en código, el programador deberá hacer uso de esta herramienta. El uso de _docstrings_ no menoscabará, ni remplazará, el uso de comentarios para describir el código.
 
