@@ -82,7 +82,7 @@ El programador siempre deberá dirigirse al líder de proyecto para saber si la 
 
 En caso que la implementación sea propietaria y no reutilice código abierto de terceros, la nota de copyright deberá ser la siguiente:
 
-```
+```Markdown
 Copyright (C) {{year}} DataInt Consultores S.A. de C.V. - All Rights Reserved.
 
 This file and its contents are regarded as proprietary and confidential.
@@ -95,7 +95,7 @@ El programador deberá sustituir `{{year}}` con el año de la primer implementac
 
 En caso que la implementación sea propietaria y reutilice código abierto de terceros, la nota de copyright deberá ser la siguiente:
 
-```
+```Markdown
 Copyright (C) {{year}} DataInt Consultores S.A. de C.V. - Some Rights Reserved.
 Copyright (C) {{os_code_year}} {{os_code_author}} // {{os_code_status}}
 
@@ -112,7 +112,7 @@ El programador deberá sustituir `{{year}}` con el año de la primer implementac
 
 En caso de que la implementación en la que trabaja el programador sea distribuida bajo una licencia de código abierto, deberá incluirse la siguiente nota de copyright:
 
-```
+```Markdown
 Copyright (C) {{year}} DataInt Consultores S.A. de C.V. - Some Rights Reserved.
 
 This software is distributed under {{license}}. Please see the LICENSE file of the project.
