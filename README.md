@@ -9,6 +9,8 @@
     - [3.1.2. Nombre](#312-nombre)
     - [3.1.3. Estructura](#313-estructura)
     - [3.1.4. Copyright](#314-copyright)
+    - [Caracteres fuera de la especificación ASCII](#caracteres-fuera-de-la-especificación-ascii)
+    - [Caracteres especiales](#caracteres-especiales)
 
 # 1. Introducción
 
@@ -113,3 +115,36 @@ El programador deberá sustituir `{{year}}` con el año de la primer implementac
 
 **Es importante recordar que, en esta sección, cuando se habla de reutilización de código de terceros, se hace referencia a la redistribución de código.** Es decir, **si el programador importa librerías o paqueterías de terceros (sin importar la licencia bajo a cual se distribuyen), éste no está redistribuyendo código** y, por lo tanto, no es necesario hacer las respectivas atribuciones a sus autores originales y DataInt puede declarar que todos los derechos de propiedad intelectual le pertenecen. Sin embargo, si el programador copia código contenido en una librería distribuida por terceros (para hacerle modificaciones o mantenerlo íntegro), es necesario hacer las respectivas atribuciones y declarar que DataInt sólo mantiene algunos derechos de propiedad intelectual.
 
+### Caracteres fuera de la especificación ASCII
+
+Si en cualquier parte del archivo el programador requiere usar caracteres fuera de la especificación ascii (como caracteres pertenecientes a alfabetos distintos al latino), el programador deberá escribirlo explícitamente y deberá evitar el uso de secuencias hexadecimales o códigos unicode con escape de texto.
+
+:white_check_mark:
+
+```js
+// Se recomienda usar la letra griega mu explícitamente
+const unidades = "μm";
+```
+
+:x:
+
+```js
+// No se recomienda usar la secuencia hexadecimal o el código unicode con escape de texto
+const unidades = "\u03bcm";
+```
+
+### Caracteres especiales
+
+Si en cualquier parte del archivo el programador requiere usar caracteres especiales (como saltos de línea, tabulaciones, espacios en blanco, etc.), el programador deberá hacer uso de la secuencia de escape tradicional (`\"`, `\s`, `\t`, `\v`, etc.) en lugar de secuencias hexadecimales o códigos unicode con escape de texto.
+
+```js
+// Se recomienda usar la secuencia de escape tradicional
+const título = "Incidencia Delictiva\nMarzo de 2020";
+```
+
+:x:
+
+```js
+// No se recomienda usar la secuencia hexadecimal o el código unicode con escape de texto
+const título = "Incidencia Delictiva\x0aMarzo de 2020";
+```
