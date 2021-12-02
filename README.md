@@ -1,17 +1,16 @@
-# Guía de estilo 
+# Guía de estilo <!-- omit in toc -->
 
-- [Guía de estilo](#guía-de-estilo)
-  - [Introducción](#introducción)
-  - [Guías auxiliares](#guías-auxiliares)
-    - [Listado de guías auxiliares](#listado-de-guías-auxiliares)
-  - [Lineamientos generales](#lineamientos-generales)
-    - [Archivos de código fuente (_source files_)](#archivos-de-código-fuente-source-files)
-      - [Codificación](#codificación)
-      - [Nombre](#nombre)
-      - [Estructura](#estructura)
-      - [Copyright](#copyright)
+- [1. Introducción](#1-introducción)
+- [2. Guías auxiliares](#2-guías-auxiliares)
+  - [2.1. Listado de guías auxiliares](#21-listado-de-guías-auxiliares)
+- [3. Lineamientos generales](#3-lineamientos-generales)
+  - [3.1. Archivos de código fuente (_source files_)](#31-archivos-de-código-fuente-source-files)
+    - [3.1.1. Codificación](#311-codificación)
+    - [3.1.2. Nombre](#312-nombre)
+    - [3.1.3. Estructura](#313-estructura)
+    - [3.1.4. Copyright](#314-copyright)
 
-## Introducción
+# 1. Introducción
 
 En esta guía se definen los lineamientos y convenciones que deberán seguirse al momento de escribir código en proyectos de DataInt. El principal objetivo de la guía es delinear un estándar de consistencia y coherencia en el código. Un proyecto con estilo consistente y coherente es más fácil de leer, entender y, por lo tanto, mantener.
 
@@ -19,7 +18,7 @@ Es importante recordar que esta guía sólo es eso: una guía, es decir, un punt
 
 Esta guía esta divida en tres partes. En primer lugar, se define un grupo de guías auxiliares para lenguajes de programación en específico. Estas deberán usarse para complementar los lineamientos de esta guía y sólo deberán usarse en aquellos casos que no se encuentran contemplados en este documento. En segundo lugar, se presentan los lineamientos generales de la organización. Aquí se definen algunas reglas básicas para trabajar en los proyectos de DataInt. Estas reglas deberán seguirse, en la medida de lo posible, en todos los lenguajes de programación. En la tercera parte, se definen reglas específicas para cada lenguaje de programación. Si una regla específica para un lenguaje de programación entra en conflicto con un lineamiento general, la regla específica tendrá preferencia sobre el lineamiento general.
 
-## Guías auxiliares
+# 2. Guías auxiliares
 
 A continuación se definen las guías auxiliares a la guía de estilo de DataInt. Las guías auxiliares son guías de estilo usadas por otras organizaciones (principalmente Google) y cuya función es complementar los lineamientos que se definen en este documento. Las guías auxiliares son específicas a cada lenguaje de programación.
 
@@ -27,7 +26,7 @@ Las guías auxiliares deberán usarse en aquellos casos que no son cubiertos por
 
 Si en la guía de estilo de DataInt no hay reglas específicas para un lenguaje de programación, el programador deberá usar la guía de estilo definida por Google para dicho lenguaje de programación. Las guías de estilo de Google pueden encontrarse en [su respectivo repositorio](https://github.com/google/styleguide).
 
-### Listado de guías auxiliares
+## 2.1. Listado de guías auxiliares
 
 - **JavaScript**: [Guía de estilo para JavaScript de Google](https://google.github.io/styleguide/jsguide.html).
 - **TypeScript**: [Guía de estilo para TypeScript de Google](https://google.github.io/styleguide/tsguide.html).
@@ -35,17 +34,17 @@ Si en la guía de estilo de DataInt no hay reglas específicas para un lenguaje 
 - **HTML y CSS**: [Guía de estilo para HTML/CSS de Google](https://google.github.io/styleguide/htmlcssguide.html).
 - **PHP**: [Guía de estilo para PHP de WordPress](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/).
 
-## Lineamientos generales
+# 3. Lineamientos generales
 
 En esta sección se definen los lineamientos generales para escribir código en los proyectos de DataInt. Los lineamientos generales deberán seguirse, en la medida de lo posible, en todo los lenguajes de programación. Ante cualquier situación no cubierta en estos lineamientos generales, el programador deberá remitirse a loos lineamientos específicos para su lenguaje de programación y, en su defecto, a una de las guías auxiliares.
 
-### Archivos de código fuente (_source files_)
+## 3.1. Archivos de código fuente (_source files_)
 
-#### Codificación
+### 3.1.1. Codificación
 
 Todos los archivos deberán ser codificados en **UTF-8**.
 
-#### Nombre
+### 3.1.2. Nombre
 
 Los nombres de los archivos siempre deberán ser en minúsculas (_lowercase_) y podrán contener guiones medios ( `-` ) y bajos ( `_` ). 
 
@@ -53,7 +52,7 @@ Los nombres de archivo no podrán contener signos de puntuación adicionales a l
 
 Los nombres de archivos no podrán contener espacios en blanco.
 
-#### Estructura
+### 3.1.3. Estructura
 
 Los archivos con código deberán tener, en la medida de lo posible, la siguiente estructura:
 
@@ -64,7 +63,7 @@ Los archivos con código deberán tener, en la medida de lo posible, la siguient
 5. Importación de dependencias escritas por DataInt.
 6. Implementación.
 
-#### Copyright
+### 3.1.4. Copyright
 
 El copyright incluido en los archivos de código dependerá, principalmente, de dos cosas: 1) si la implementación puede ser redistribuida o no (código abierto o código propietario) y 2) si la implementación utiliza código abierto proporcionado por terceros. 
 
