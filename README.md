@@ -112,6 +112,5 @@ DataInt Consultores S.A. de C.V. is a company constituted under Mexican law with
 
 El programador deberá sustituir `{{year}}` con el año de la primer implementación y `{{license}}` con el nombre de la licencia bajo la cual se distribuye el software.
 
-
-
+**Es importante recordar que, en esta sección, cuando se habla de reutilización de código de terceros, se hace referencia a la redistribución de código.** Es decir, **si el programador importa librerías o paqueterías de terceros (sin importar la licencia bajo a cual se distribuyen), éste no está redistribuyendo código** y, por lo tanto, no es necesario hacer las respectivas atribuciones a sus autores originales y DataInt puede declarar que todos los derechos de propiedad intelectual le pertenecen. Sin embargo, si el programador copia código contenido en una librería distribuida por terceros (para hacerle modificaciones o mantenerlo íntegro), es necesario hacer las respectivas atribuciones y declarar que DataInt sólo mantiene algunos derechos de propiedad intelectual.
 
