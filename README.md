@@ -159,3 +159,10 @@ const título = "Incidencia Delictiva\nMarzo de 2020";
 // Don't use the ascii escaped codes
 const título = "Incidencia Delictiva\x0aMarzo de 2020";
 ```
+
+### 3.1.7. Final de archivo
+
+Todos los archivos deberán terminar con un salto de línea (`\n`) o, en su defecto, un retorno de carro con nueva línea (`\rn`). 
+
+## 3.2. Disposición del código
+
