@@ -149,7 +149,7 @@ El programador deberá separar con líneas en blanco grupos de declaraciones, m�
 **Correcto** :white_check_mark:
 
 ```js
-// Copyright (C) {{year}} DataInt Consultores S.A. de C.V. - All Rights Reserved.
+// Copyright (C) {year} DataInt Consultores S.A. de C.V. - All Rights Reserved.
 //
 // This file and its contents are regarded as proprietary and confidential.
 // Unauthorized copying of this file, via any medium is strictly prohibited.
@@ -188,7 +188,7 @@ class Persona {
 **Incorrecto** :x:
 
 ```js
-// Copyright (C) {{year}} DataInt Consultores S.A. de C.V. - All Rights Reserved.
+// Copyright (C) {year} DataInt Consultores S.A. de C.V. - All Rights Reserved.
 //
 // This file and its contents are regarded as proprietary and confidential.
 // Unauthorized copying of this file, via any medium is strictly prohibited.
