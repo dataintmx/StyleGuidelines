@@ -251,3 +251,50 @@ class Persona {
 ### 3.2.3. Sangrado (_indentation_) y tabulación
 
 Cada vez que se abre un nuevo bloque de código, se incrementa el sangrado en 4 espacios en blanco (`\s`). El sangrado del código deberá hacerse con espacios en blanco y deberá evitarse el uso de tabuladores (`\t`).
+
+# 4. Estilo de código
+
+## 4.1. Comentarios y documentación en código
+
+### 4.1.1. Comentarios
+
+Todo el código debe comentarse. El programador siempre debe tener en mente que debe dejar una nota describiendo qué hacen sus funciones, declaraciones, clases, métodos e importaciones, siempre que éstas no sean explícitas y descriptivas. Estas notas deben ser suficientemente claras para que, otros colaboradores del proyecto (dentro y fuera de DataInt), puedan entender el código que están leyendo.
+
+**Los comentarios en el código siempre deberán escribirse en inglés**. 
+
+En idiomas de programación que permiten bloques de comentarios, se recomienda reservar la notación de bloque para comentarios que abarquen más de una línea. Si el comentario sólo abarca una línea, se recomienda usar exclusivamente la marca de línea comentada por default.
+
+**Correcto** :white_check_mark:
+
+```js
+// This is a single line comment
+
+/*
+This is a multiline comment. Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit. Phasellus ante leo, auctor id dolor vel, rhoncus viverra massa. 
+Cras in feugiat arcu. In vehicula est ligula, eu efficitur libero aliquam vel. 
+*/
+
+
+// This is a multiline comment. Lorem ipsum dolor sit amet, 
+// consectetur adipiscing elit. Phasellus ante leo, auctor id dolor vel, rhoncus viverra massa. 
+// Cras in feugiat arcu. In vehicula est ligula, eu efficitur libero aliquam vel. 
+```
+
+**Incorrecto** :x:
+
+```js
+// Este es un comentario en español
+
+/* Don't use block comment notation for single line comments! */
+```
+
+### 4.1.2. Documentación en código (_docstring_)
+
+En idiomas de programación que permiten el uso de _docstrings_, o cadenas de documentación en código, el programador deberá hacer uso de esta herramienta. El uso de _docstrings_ no menoscabará, ni remplazará, el uso de comentarios para describir el código.
+
+Toda documentación en código deberá contener, por lo menos, los siguientes elementos:
+
+1. Descripción breve de la función, método o clase.
+2. Nombre de los parámetros requeridos, su tipo y una breve descripción.
+3. Tipo del objeto devuelto (_return_) y descripción.
