@@ -166,3 +166,88 @@ Todos los archivos deberán terminar con un salto de línea (`\n`) o, en su defe
 
 ## 3.2. Disposición del código
 
+### 3.2.1. Longitud máxima de línea
+
+Las líneas de código deberán limitarse a **120 caracteres**.
+
+Las líneas de comentarios y documentación en código (_docstring_) deberán limitarse a **80 caracteres** para facilitar su legibilidad.
+
+### 3.2.2. Líneas en blanco
+
+Deberán colocarse una línea en blanco después de la nota de copyright al inicio del archivo.
+
+Deberán colocarse dos líneas en blanco por encima de definiciones de clases.
+
+Deberán colocarse una línea en blanco al rededor de definiciones de métodos o funciones.
+
+El programador deberá separar con líneas en blanco grupos de declaraciones, métodos o funciones.
+
+**Correcto** :white_check_mark:
+
+```js
+// Copyright (C) {{year}} DataInt Consultores S.A. de C.V. - All Rights Reserved.
+//
+// This file and its contents are regarded as proprietary and confidential.
+// Unauthorized copying of this file, via any medium is strictly prohibited.
+//
+// DataInt Consultores S.A. de C.V. is a company constituted under Mexican law with its principal place of business
+// at Mexico City.
+
+// Personal info
+const nombre = "Fulano";
+const apellido = "Pérez";
+const teléfono = "1010101010";
+
+// Pet info
+// Note the declaration is separated from the previous block of declarations by one space, 
+// since it belongs to a different group
+const mascotas = ["Negrito", "Panchito"];
+
+
+// Before a class declaration, two blank lines
+class Persona {
+  constructor(nombre, apellido, teléfono, mascotas) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.teléfono = teléfono;
+    this.mascotas = mascotas
+  }
+
+  // Before and after functions and methods, one blank line
+  get nombre_en_mayusculas() {
+    return this.nombre.toUpperCase();
+  }
+
+}
+```
+
+**Incorrecto** :x:
+
+```js
+// Copyright (C) {{year}} DataInt Consultores S.A. de C.V. - All Rights Reserved.
+//
+// This file and its contents are regarded as proprietary and confidential.
+// Unauthorized copying of this file, via any medium is strictly prohibited.
+//
+// DataInt Consultores S.A. de C.V. is a company constituted under Mexican law with its principal place of business
+// at Mexico City.
+const nombre = "Fulano";
+const apellido = "Pérez";
+const teléfono = "1010101010";
+
+class Persona {
+  constructor(nombre, apellido, teléfono, mascotas) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.teléfono = teléfono;
+    this.mascotas = mascotas
+  }
+  get nombre_en_mayusculas() {
+    return this.nombre.toUpperCase();
+  }
+}
+```
+
+### 3.2.3. Sangrado (_indentation_) y tabulación
+
+Cada vez que se abre un nuevo bloque de código, se incrementa el sangrado en 4 espacios en blanco (`\s`). El sangrado del código deberá hacerse con espacios en blanco y deberá evitarse el uso de tabuladores (`\t`).
