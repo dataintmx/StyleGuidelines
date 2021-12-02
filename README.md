@@ -11,6 +11,15 @@
     - [3.1.4. Copyright](#314-copyright)
     - [3.1.5. Caracteres fuera de la especificación ASCII](#315-caracteres-fuera-de-la-especificación-ascii)
     - [3.1.6. Caracteres especiales](#316-caracteres-especiales)
+    - [3.1.7. Final de archivo](#317-final-de-archivo)
+  - [3.2. Disposición del código](#32-disposición-del-código)
+    - [3.2.1. Longitud máxima de línea](#321-longitud-máxima-de-línea)
+    - [3.2.2. Líneas en blanco](#322-líneas-en-blanco)
+    - [3.2.3. Sangrado (_indentation_) y tabulación](#323-sangrado-indentation-y-tabulación)
+- [4. Estilo de código](#4-estilo-de-código)
+  - [4.1. Comentarios y documentación en código](#41-comentarios-y-documentación-en-código)
+    - [4.1.1. Comentarios](#411-comentarios)
+    - [4.1.2. Documentación en código (_docstring_)](#412-documentación-en-código-docstring)
 
 # 1. Introducción
 
