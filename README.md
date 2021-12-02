@@ -119,14 +119,14 @@ El programador deberá sustituir `{{year}}` con el año de la primer implementac
 
 Si en cualquier parte del archivo el programador requiere usar caracteres fuera de la especificación ascii (como caracteres pertenecientes a alfabetos distintos al latino), el programador deberá escribirlo explícitamente y deberá evitar el uso de secuencias hexadecimales o códigos unicode con escape de texto.
 
-:white_check_mark:
+**Correcto** :white_check_mark:
 
 ```js
 // Se recomienda usar la letra griega mu explícitamente
 const unidades = "μm";
 ```
 
-:x:
+**Incorrecto** :x:
 
 ```js
 // No se recomienda usar la secuencia hexadecimal o el código unicode con escape de texto
@@ -137,12 +137,14 @@ const unidades = "\u03bcm";
 
 Si en cualquier parte del archivo el programador requiere usar caracteres especiales (como saltos de línea, tabulaciones, espacios en blanco, etc.), el programador deberá hacer uso de la secuencia de escape tradicional (`\"`, `\s`, `\t`, `\v`, etc.) en lugar de secuencias hexadecimales o códigos unicode con escape de texto.
 
+**Correcto** :white_check_mark:
+
 ```js
 // Se recomienda usar la secuencia de escape tradicional
 const título = "Incidencia Delictiva\nMarzo de 2020";
 ```
 
-:x:
+**Incorrecto** :x:
 
 ```js
 // No se recomienda usar la secuencia hexadecimal o el código unicode con escape de texto
