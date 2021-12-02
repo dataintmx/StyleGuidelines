@@ -220,7 +220,7 @@ Cada vez que se abre un nuevo bloque de código, se incrementa el sangrado en 4 
 
 ### 3.3.1. Caracteres fuera de la especificación ASCII
 
-Si en cualquier parte del código el programador requiere usar caracteres fuera de la especificación ascii (como caracteres pertenecientes a alfabetos distintos al latino), el programador deberá escribirlo explícitamente y deberá evitar el uso de secuencias hexadecimales o códigos unicode con escape de texto.
+Si el programador requiere usar caracteres fuera de la especificación ascii (como caracteres pertenecientes a alfabetos distintos al latino), el programador deberá escribirlo explícitamente y deberá evitar el uso de secuencias hexadecimales o códigos unicode con escape de texto.
 
 **Correcto** :white_check_mark:
 
@@ -238,7 +238,7 @@ const unidades = "\u03bcm";
 
 ### 3.3.2. Caracteres especiales
 
-Si en cualquier parte del archivo el programador requiere usar caracteres especiales (como saltos de línea, tabulaciones, espacios en blanco, etc.), el programador deberá hacer uso de la secuencia de escape tradicional (`\"`, `\s`, `\t`, `\v`, etc.) en lugar de secuencias hexadecimales o códigos unicode con escape de texto.
+Si el programador requiere usar caracteres especiales (como saltos de línea, tabulaciones, espacios en blanco, etc.), el programador deberá hacer uso de la secuencia de escape tradicional (`\"`, `\s`, `\t`, `\v`, etc.) en lugar de secuencias hexadecimales o códigos unicode con escape de texto.
 
 **Correcto** :white_check_mark:
 
