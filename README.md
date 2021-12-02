@@ -131,14 +131,14 @@ Si en cualquier parte del archivo el programador requiere usar caracteres fuera 
 **Correcto** :white_check_mark:
 
 ```js
-// Se recomienda usar la letra griega mu explícitamente
+// Explicit use of the greek letter 'mu'
 const unidades = "μm";
 ```
 
 **Incorrecto** :x:
 
 ```js
-// No se recomienda usar la secuencia hexadecimal o el código unicode con escape de texto
+// Don't use escaped hexadecimal or unicode
 const unidades = "\u03bcm";
 ```
 
@@ -149,13 +149,13 @@ Si en cualquier parte del archivo el programador requiere usar caracteres especi
 **Correcto** :white_check_mark:
 
 ```js
-// Se recomienda usar la secuencia de escape tradicional
+// Always use the 'traditional' escaped character
 const título = "Incidencia Delictiva\nMarzo de 2020";
 ```
 
 **Incorrecto** :x:
 
 ```js
-// No se recomienda usar la secuencia hexadecimal o el código unicode con escape de texto
+// Don't use the ascii escaped codes
 const título = "Incidencia Delictiva\x0aMarzo de 2020";
 ```
