@@ -83,7 +83,7 @@ El programador siempre deberá dirigirse al líder de proyecto para saber si la 
 En caso que la implementación sea propietaria y no reutilice código abierto de terceros, la nota de copyright deberá ser la siguiente:
 
 ```Markdown
-Copyright (C) {{year}} DataInt Consultores S.A. de C.V. - All Rights Reserved.
+Copyright (C) {year} DataInt Consultores S.A. de C.V. - All Rights Reserved.
 
 This file and its contents are regarded as proprietary and confidential.
 Unauthorized copying of this file, via any medium is strictly prohibited.
@@ -91,36 +91,36 @@ Unauthorized copying of this file, via any medium is strictly prohibited.
 DataInt Consultores S.A. de C.V. is a company constituted under Mexican law with its principal place of business at Mexico City.
 ```
 
-El programador deberá sustituir `{{year}}` con el año de la primer implementación (es decir, el año en el que se creo el archivo). 
+El programador deberá sustituir `{year}` con el año de la primer implementación (es decir, el año en el que se creo el archivo). 
 
 En caso que la implementación sea propietaria y reutilice código abierto de terceros, la nota de copyright deberá ser la siguiente:
 
 ```Markdown
-Copyright (C) {{year}} DataInt Consultores S.A. de C.V. - Some Rights Reserved.
-Copyright (C) {{os_code_year}} {{os_code_author}} // {{os_code_status}}
+Copyright (C) {year} DataInt Consultores S.A. de C.V. - Some Rights Reserved.
+Copyright (C) {os_code_year} {os_code_author} // {os_code_status}
 
 This file and some of its contents are regarded as proprietary and confidential.
 Unauthorized copying of this file, via any medium is strictly prohibited.
 
 This implementation reuses the following works:
-{{os_code_author}}, {{os_code_name}}, {{os_code_author}}, licensed under {{os_code_license}}
+{os_code_author}, {os_code_name}, {os_code_author}, licensed under {os_code_license}
 
 DataInt Consultores S.A. de C.V. is a company constituted under Mexican law with its principal place of business at Mexico City.
 ```
 
-El programador deberá sustituir `{{year}}` con el año de la primer implementación. De igual forma, el programador deberá sustituir `{{os_code_year}}`, `{{os_code_author}}`, `{{os_code_status}}`, `{{os_code_license}}` y `{{os_code_name}}` por el año de publicación del código reutilizado, el nombre completo del autor del código reutilizado, el estado del código reutilizado (`modified` o `unchanged`), el nombre de a licencia bajo la cual se distribuyó el código y el nombre del programa o librería que se reutilizó, respectivamente. No está de más mencionar que, si en la implementación, se reutiliza código de más de un programa o librería de terceros, el programador deberá incluirlos en líneas separadas.
+El programador deberá sustituir `{year}` con el año de la primer implementación. De igual forma, el programador deberá sustituir `{os_code_year}`, `{os_code_author}`, `{os_code_status}`, `{os_code_license}` y `{os_code_name}` por el año de publicación del código reutilizado, el nombre completo del autor del código reutilizado, el estado del código reutilizado (`modified` o `unchanged`), el nombre de a licencia bajo la cual se distribuyó el código y el nombre del programa o librería que se reutilizó, respectivamente. No está de más mencionar que, si en la implementación, se reutiliza código de más de un programa o librería de terceros, el programador deberá incluirlos en líneas separadas.
 
 En caso de que la implementación en la que trabaja el programador sea distribuida bajo una licencia de código abierto, deberá incluirse la siguiente nota de copyright:
 
 ```Markdown
-Copyright (C) {{year}} DataInt Consultores S.A. de C.V. - Some Rights Reserved.
+Copyright (C) {year} DataInt Consultores S.A. de C.V. - Some Rights Reserved.
 
-This software is distributed under {{license}}. Please see the LICENSE file of the project.
+This software is distributed under {license}. Please see the LICENSE file of the project.
 
 DataInt Consultores S.A. de C.V. is a company constituted under Mexican law with its principal place of business at Mexico City.
 ```
 
-El programador deberá sustituir `{{year}}` con el año de la primer implementación y `{{license}}` con el nombre de la licencia bajo la cual se distribuye el software.
+El programador deberá sustituir `{year}` con el año de la primer implementación y `{license}` con el nombre de la licencia bajo la cual se distribuye el software.
 
 **Es importante recordar que, en esta sección, cuando se habla de reutilización de código de terceros, se hace referencia a la redistribución de código.** Es decir, **si el programador importa librerías o paqueterías de terceros (sin importar la licencia bajo a cual se distribuyen), éste no está redistribuyendo código** y, por lo tanto, no es necesario hacer las respectivas atribuciones a sus autores originales y DataInt puede declarar que todos los derechos de propiedad intelectual le pertenecen. Sin embargo, si el programador copia código contenido en una librería distribuida por terceros (para hacerle modificaciones o mantenerlo íntegro), es necesario hacer las respectivas atribuciones y declarar que DataInt sólo mantiene algunos derechos de propiedad intelectual.
 
