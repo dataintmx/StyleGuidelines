@@ -61,7 +61,7 @@ Si en la guía de estilo de DataInt no hay reglas específicas para un lenguaje 
 
 # 3. Lineamientos generales
 
-En esta sección se definen los lineamientos generales para escribir código en los proyectos de DataInt. Los lineamientos generales deberán seguirse, en la medida de lo posible, en todo los lenguajes de programación. Ante cualquier situación no cubierta en estos lineamientos generales, el programador deberá remitirse a loos lineamientos específicos para su lenguaje de programación y, en su defecto, a una de las guías auxiliares.
+En esta sección se definen los lineamientos generales para escribir código en los proyectos de DataInt. Los lineamientos generales deberán seguirse, en la medida de lo posible, en todo los lenguajes de programación. Ante cualquier situación no cubierta en estos lineamientos generales, el programador deberá remitirse a los lineamientos específicos para su lenguaje de programación y, en su defecto, a una de las guías auxiliares.
 
 ## 3.1. Archivos de código fuente (_source files_)
 
