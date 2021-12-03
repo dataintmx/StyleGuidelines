@@ -228,7 +228,7 @@ class Persona {
 
 ### 3.2.3. Sangrado (_indentation_) y tabulación
 
-Cada vez que se abre un nuevo bloque de código, se incrementa el sangrado en 4 espacios en blanco (`\s`). El sangrado del código deberá hacerse con espacios en blanco y deberá evitarse el uso de tabuladores (`\t`).
+Cada vez que se abre un nuevo bloque de código, se incrementa el **sangrado en 4 espacios en blanco** (`\s`). El sangrado del código deberá hacerse con espacios en blanco y deberá evitarse el uso de tabuladores (`\t`).
 
 ## 3.3. Estilo de código
 
