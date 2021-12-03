@@ -20,6 +20,16 @@
     - [3.3.3. Comentarios y documentación en código](#333-comentarios-y-documentación-en-código)
       - [3.3.3.1. Comentarios](#3331-comentarios)
       - [3.3.3.2. Documentación en código (_docstring_)](#3332-documentación-en-código-docstring)
+    - [3.3.4. Nomenclatura](#334-nomenclatura)
+      - [3.3.4.1. Nomenclatura por tipo de identificador](#3341-nomenclatura-por-tipo-de-identificador)
+        - [3.3.4.1.1. Paquetes y módulos](#33411-paquetes-y-módulos)
+        - [3.3.4.1.2. Clases](#33412-clases)
+        - [3.3.4.1.3. Métodos y funciones](#33413-métodos-y-funciones)
+        - [3.3.4.1.4. Variables y constantes globales](#33414-variables-y-constantes-globales)
+        - [3.3.4.1.5. Objetos privados](#33415-objetos-privados)
+        - [3.3.4.1.6. Parámetros](#33416-parámetros)
+        - [3.3.4.1.7. Variables y constantes locales](#33417-variables-y-constantes-locales)
+    - [3.3.5. Uso de espacios en expresiones y declaraciones](#335-uso-de-espacios-en-expresiones-y-declaraciones)
 
 # 1. Introducción
 
