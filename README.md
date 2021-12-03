@@ -312,3 +312,121 @@ Toda documentación en código deberá contener, por lo menos, los siguientes el
 1. Descripción breve de la función, método o clase.
 2. Nombre de los parámetros requeridos, su tipo y una breve descripción.
 3. Tipo del objeto devuelto (_return_) y descripción.
+
+### 3.3.4. Nomenclatura
+
+Los nombres de objetos, funciones, métodos y clases **sólo podrán escribirse usando caracteres ASCII** (esto incluye el uso de acentos y la letra "ñ"). **Los nombres pueden ser en inglés o español**. Si son en español, se recomienda seguir las reglas de ortografía (es decir, acentuar correctamente y evitar la sustitución de `ñ` por `ni`: `año -> anio`). Se recomienda que el programador no mezcle idiomas en el mismo archivo. Es decir, si en un archivo hay objetos nombrados en inglés, no debería utilizar nombres en español, y viceversa.
+
+El programador, en la medida de lo posible, siempre debe priorizar el uso de **nombres completos y descriptivos de los objetos**, funciones, métodos y clases en el código. Es decir, el programador debe evitar abreviaciones ambiguas, siglas y acrónimos ambiguos, así como la remoción de vocales. De igual forma, debe evitarse el uso de [notación húngara](https://en.wikipedia.org/wiki/Hungarian_notation). 
+
+El programador podrá hacer excepciones en el caso de funciones estadísticas donde hay un uso razonablemente común de letras (latinas y griegas) para designar algunos objetos. Por ejemplo, las medias tienden a denotarse `mu`, la desviación estándar `s`, el tamaño de muestra `n`, la probabilidad `p` o `pi`, etc.
+
+#### 3.3.4.1. Nomenclatura por tipo de identificador
+
+##### 3.3.4.1.1. Paquetes y módulos
+
+Los nombres de paquetes y módulos de código siempre deben ser `UpperCamelCase`. Por ejemplo: `DataIntAuth.Core.DataIntUser`.
+
+##### 3.3.4.1.2. Clases
+
+Los nombres de clases siempre deben ser `UpperCamelCase`. Por ejemplo: `DataIntUser`.
+
+##### 3.3.4.1.3. Métodos y funciones
+
+Los nombres de métodos y funciones siempre deben ser `lower_snake_case`, por ejemplo `DataIntUser.create_token()`.
+
+##### 3.3.4.1.4. Variables y constantes globales
+
+Los nombres de variables y constantes globales —incluidas las de ambiente (_environment_)— deben ser `UPPER_SNAKE_CASE`.
+
+##### 3.3.4.1.5. Objetos privados
+
+En idiomas de programación que no dispongan de una definición formal de objeto (propiedades, métodos, funciones, etc.) privado, éstas se denotarán con un guión bajo como prefijo ( `_` ). Por ejemplo: `_propiedad_privada`.
+
+##### 3.3.4.1.6. Parámetros
+
+Los parámetros de funciones y constructores de clase se escribirán en `lower_snake_case`.
+
+##### 3.3.4.1.7. Variables y constantes locales
+
+Los nombres de variables y constantes locales se escribirán en `lower_snake_case`.
+
+### 3.3.5. Uso de espacios en expresiones y declaraciones
+
+Al menos que el lenguaje de programación asi lo requiera, deberá evitarse añadir espacios en blanco inmediatamente al interior de paréntesis o llaves.
+
+**Correcto** :white_check_mark:
+
+```js
+const my_formula = x_1 + x_2 * b_2 + x_3 * (b_3 + c);
+```
+
+**Incorrecto** :x:
+
+```js
+const my_formula = x_1 + x_2 * b_2 + x_3 * ( b_3 + c );
+```
+
+Al menos que el lenguaje de programación así lo requiera, deberá evitarse añadir espacios en blanco después de una coma y antes de un paréntesis o llave de cierre.
+
+**Correcto** :white_check_mark:
+
+```js
+var array = [1, 3, 3,];
+```
+
+**Incorrecto** :x:
+
+```js
+var array = [1, 3, 3, ];
+```
+
+Al menos que el lenguaje de programación así lo requiera, deberá evitarse añadir espacios en blanco inmediatamente antes de comas.
+
+**Correcto** :white_check_mark:
+
+```js
+var array = [1, 3, 3];
+```
+
+**Incorrecto** :x:
+
+```js
+var array = [1 , 3 , 3];
+```
+
+Deberá evitarse añadir espacios en blanco para alinear expresiones en el archivo.
+
+**Correcto** :white_check_mark:
+
+```js
+const a = 1;
+const b = 2;
+const long_const_name = 99;
+```
+
+**Incorrecto** :x:
+
+```js
+const a                = 1;
+const b                = 2;
+const long_const_name = 99;
+```
+
+Siempre deberá añadirse un espacio en lanco al rededor de operadores binarios (`<`, `>`, `!=`, etc.) y expresiones de asignación (`=`, `<-`, `->`, `+=`, etc.).
+
+**Correcto** :white_check_mark:
+
+```js
+const a = 1;
+const b = 2;
+const a_bigger_than_b = a > b;
+```
+
+**Incorrecto** :x:
+
+```js
+const a=1;
+const b=2;
+const a_bigger_than_b=a>b;
+```
