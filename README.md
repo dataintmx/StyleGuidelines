@@ -43,7 +43,11 @@ Esta guía esta divida en tres partes. En primer lugar, se define un grupo de gu
 
 A continuación se definen las guías auxiliares a la guía de estilo de DataInt. Las guías auxiliares son guías de estilo usadas por otras organizaciones (principalmente Google) y cuya función es complementar los lineamientos que se definen en este documento. Las guías auxiliares son específicas a cada lenguaje de programación.
 
-Las guías auxiliares deberán usarse en aquellos casos que no son cubiertos por la guía de estilo de DataInt. Si una regla en una guía auxiliar entra en conflicto con una regla específica de lenguaje o un lineamiento general definidos en este documento, las reglas o lineamientos definidos aquí tendrán preferencia sobre aquellas definidas en una guía auxiliar. 
+Las guías auxiliares deberán usarse en aquellos casos que no son cubiertos por la guía de estilo de DataInt. Si una regla en una guía auxiliar entra en conflicto con una regla específica de lenguaje o un lineamiento general definidos en este documento, las reglas o lineamientos definidos aquí tendrán preferencia sobre aquellas definidas en una guía auxiliar. En resumen, la jerarquía de reglas es la siguiente:
+
+1. Lineamientos generales (guía de estilo de DataInt).
+2. Reglas específicas para lenguajes de programación (guía de estilo de DataInt).
+3. Guía auxiliar de estilo.
 
 Si en la guía de estilo de DataInt no hay reglas específicas para un lenguaje de programación, el programador deberá usar la guía de estilo definida por Google para dicho lenguaje de programación. Las guías de estilo de Google pueden encontrarse en [su respectivo repositorio](https://github.com/google/styleguide).
 
