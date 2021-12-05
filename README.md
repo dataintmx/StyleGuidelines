@@ -316,7 +316,7 @@ Toda documentación en código deberá contener, por lo menos, los siguientes el
 
 ### 3.3.4. Nomenclatura
 
-Los nombres de objetos, funciones, métodos y clases **sólo podrán escribirse usando caracteres ASCII** (esto incluye el uso de acentos y la letra "ñ"). **Los nombres pueden ser en inglés o español**. Si son en español, se recomienda seguir las reglas de ortografía (es decir, acentuar correctamente y evitar la sustitución de `ñ` por `ni`: `año -> anio`). Se recomienda que el programador no mezcle idiomas en el mismo archivo. Es decir, si en un archivo hay objetos nombrados en inglés, no debería utilizar nombres en español, y viceversa.
+Los nombres de objetos, funciones, métodos y clases **sólo podrán escribirse usando caracteres ASCII** (esto incluye el uso de acentos y la letra "ñ"). **Los nombres deben ser en inglés**. En el caso excepcional de que sean en castellano, se recomienda seguir las reglas de ortografía (es decir, acentuar correctamente y evitar la sustitución de `ñ` por `ni`: `año -> anio`).
 
 El programador, en la medida de lo posible, siempre debe priorizar el uso de **nombres completos y descriptivos de los objetos**, funciones, métodos y clases en el código. Es decir, el programador debe evitar abreviaciones ambiguas, siglas y acrónimos ambiguos, así como la remoción de vocales. De igual forma, debe evitarse el uso de [notación húngara](https://en.wikipedia.org/wiki/Hungarian_notation). 
 
