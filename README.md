@@ -172,28 +172,28 @@ El programador deberá separar con líneas en blanco grupos de declaraciones, m�
 // at Mexico City.
 
 // Personal info
-const nombre = "Fulano";
-const apellido = "Pérez";
-const teléfono = "1010101010";
+const name = "Fulano";
+const last_name = "Pérez";
+const phone = "1010101010";
 
 // Pet info
 // Note the declaration is separated from the previous block of declarations by one space, 
 // since it belongs to a different group
-const mascotas = ["Negrito", "Panchito"];
+const phone = ["Negrito", "Panchito"];
 
 
 // Before a class declaration, two blank lines
 class Persona {
-  constructor(nombre, apellido, teléfono, mascotas) {
-    this.nombre = nombre;
-    this.apellido = apellido;
-    this.teléfono = teléfono;
-    this.mascotas = mascotas
+  constructor(name, last_name, phone, pets) {
+    this.name = name;
+    this.last_name = last_name;
+    this.phone = phone;
+    this.pets = pets
   }
 
   // Before and after functions and methods, one blank line
-  get nombre_en_mayusculas() {
-    return this.nombre.toUpperCase();
+  get name_to_upper() {
+    return this.name.toUpperCase();
   }
 
 }
@@ -209,19 +209,20 @@ class Persona {
 //
 // DataInt Consultores S.A. de C.V. is a company constituted under Mexican law with its principal place of business
 // at Mexico City.
-const nombre = "Fulano";
-const apellido = "Pérez";
-const teléfono = "1010101010";
+const name = "Fulano";
+const last_name = "Pérez";
+const phone = "1010101010";
+const phone = ["Negrito", "Panchito"];
 
 class Persona {
-  constructor(nombre, apellido, teléfono, mascotas) {
-    this.nombre = nombre;
-    this.apellido = apellido;
-    this.teléfono = teléfono;
-    this.mascotas = mascotas
+  constructor(name, last_name, phone, pets) {
+    this.name = name;
+    this.last_name = last_name;
+    this.phone = phone;
+    this.pets = pets
   }
-  get nombre_en_mayusculas() {
-    return this.nombre.toUpperCase();
+  get name_to_upper() {
+    return this.name.toUpperCase();
   }
 }
 ```
@@ -240,14 +241,14 @@ Si el programador requiere usar caracteres fuera de la especificación ascii (co
 
 ```js
 // Explicit use of the greek letter 'mu'
-const unidades = "μm";
+const units = "μm";
 ```
 
 **Incorrecto** :x:
 
 ```js
 // Don't use escaped hexadecimal or unicode
-const unidades = "\u03bcm";
+const units = "\u03bcm";
 ```
 
 ### 3.3.2. Caracteres especiales
@@ -258,14 +259,14 @@ Si el programador requiere usar caracteres especiales (como saltos de línea, ta
 
 ```js
 // Always use the 'traditional' escaped character
-const título = "Incidencia Delictiva\nMarzo de 2020";
+const title = "Incidencia Delictiva\nMarzo de 2020";
 ```
 
 **Incorrecto** :x:
 
 ```js
 // Don't use the ascii escaped codes
-const título = "Incidencia Delictiva\x0aMarzo de 2020";
+const title = "Incidencia Delictiva\x0aMarzo de 2020";
 ```
 
 ### 3.3.3. Comentarios y documentación en código
