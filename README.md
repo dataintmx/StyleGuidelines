@@ -409,8 +409,8 @@ const long_const_name = 99;
 **Incorrecto** :x:
 
 ```js
-const a                = 1;
-const b                = 2;
+const a               = 1;
+const b               = 2;
 const long_const_name = 99;
 ```
 
