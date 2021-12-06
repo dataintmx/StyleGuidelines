@@ -80,8 +80,76 @@ En el nivel principal (_root_, `/`) del repositorio, siempre deberán estar pres
 
 El programador deberá evitar, en la medida de lo posible, incluir archivos de código fuente (_source files_) en el nivel principal (_root_, `/`) del proyecto. 
 
+## 3.2. Flujo de trabajo con sistema de control de versiones
 
-### 3.1.1. Codificación
+El programador deberá tener en cuenta las siguientes reglas al momento de trabajar con git en los proyectos de DataInt:
+
+1. La rama principal del proyecto y la que contendrá la última versión estable del código se llamará `master`.
+2. El programador deberá evitar trabajar directamente cambios sobre la rama `master`.
+3. Todo proyecto de DataInt deberá tener una rama de desarrollo que se llamará `dev`.
+4. La rama `dev` será una bifurcación de `master`.
+5. Cada vez que el programador empiece la implementación de una nueva característica, deberá crear una bifurcación de `dev` hacia una nueva rama `feat/*`. Una vez terminada la implementación de una nueva característica, deberá hacer un _merge_ con la rama de desarrollo `dev` o, en su defecto, solicitar un _pull request_ o un _merge request_ al responsable de proyecto (según las reglas previamente definidas del proyecto).   
+6. Cada vez que el programador empiece a trabajar en parches o soluciones a problemas que se presentaron en características ya implementadas del código, deberá crear una bifurcación de `dev` hacia un nueva rama `fix/*`. Una vez terminada la implementación de la solución, deberá hacer un _merge_ con la rama de desarrollo `dev` o, en su defecto, solicitar un _pull request_ o un _merge request_ al responsable de proyecto (según las reglas previamente definidas del proyecto). 
+7. Cuando el responsable de proyecto así lo indique, deberá crearse una rama de entrega o _release_ `release/*`. La rama `release/*` deberá ser una bifurcación del estado que guarda la rama `dev`.
+8. Una vez creada la rama `release/*`, los integrantes del proyecto no podrán crear nuevas ramas de características (`feat/*`) y sólo podrán limitar su trabajo en el proyecto a tareas de documentación y arreglo de _bugs_ presentes en la rama `release/*`. 
+9. Para la modificación o adición de documentación que requiere cambios en el repositorio, el programador deberá crear una rama `doc/*` a partir de `release/*`. Una vez terminada la modificación o adición de nueva documentación, el programador deberá hacer un _merge_ con la rama de entrega `release/*` o, en su defecto, solicitar un _pull request_ o un _merge request_ al responsable de proyecto (según las reglas previamente definidas del proyecto).   
+10. Para el arreglo de _bugs_ y otros problemas en el código detectados en la rama `release/*`, el programador deberá crear una rama `bugfix/*` a partir de `release/*`. Una vez terminada la implementación del parche, el programador deberá hacer un _merge_ con la rama de entrega `release/*` o, en su defecto, solicitar un _pull request_ o un _merge request_ al responsable de proyecto (según las reglas previamente definidas del proyecto).
+11. En algunos proyectos será necesario liberar versiones de acceso temprano para realizar pruebas directamente con clientes o con otras áreas de DataInt. En estos casos, el equipo de desarrollo podrá montar la aplicación o servicio directamente desde la última rama `release/*`. Los parches para problemas detectados en esta prueba de etapas sobre acceso temprano se realizarán conforme a lo estipulado en el punto 9 de estos lineamientos. 
+12. Cuando el responsable de proyecto así lo indique, y el _software_ esté listo para entrega, se hará un _merge_ entre la rama `release/*` y el `master` del repositorio.
+13. Si el equipo de desarrollo detecta un problema en la última versión del código disponible en la rama `master`, podrá realizarse un parche directamente sobre esta rama. Este tipo de parches deberán realizarse en una rama `hotfix/*` que se bifurcará directamente de `master` y deberá ser fusionada directamente con ésta (previa autorización del responsable del proyecto o vía _pull request_). Los parches `hotfix/*` sólo deberán ser aplicados en los siguientes casos: i) cuando el equipo de desarrollo no programe otro _release_ del producto en un periodo menor a 30 días y ii) cuando la implementación del `hotfix/*` propuesto sea razonablemente menor y no tenga un impacto directo en el usuario final.
+14. Los equipos de desarrollo deberán dar seguimiento a errores y problemas en el código usando los sistemas de _issues_ proporcionados por las plataformas de alojamiento de repositorios, como GitHub o GitLab.
+
+### 3.2.1. Nomenclatura
+
+Los nombres de las ramas en las que trabaja el programador deberán ser claros y descriptivos del trabajo realizado, evitando, en la medida de lo posible, abreviaciones o siglas ambiguas. 
+
+**Deberá usarse el idioma inglés para nombrar las ramas de trabajo** y sólo puede usarse el guión medio `-` como separador de palabras. Las diagonales `/` se reservarán para etiquetas o categorías como prefijo del nombre de la rama.
+
+Los prefijos permitidos, como se estableció en la sección anterior, son: `feat/`, `fix/`, `release/` y `hotfix/`.
+
+En el caso de parches o soluciones (`fix/` y `hotfix/`), el nombre de la rama debe empezar con el identificador de problema asignado por el sistema de _issues_ proporcionados por las plataformas de alojamiento de repositorios, como GitHub o GitLab.
+
+**Correcto** :white_check_mark:
+
+```bash
+git checkout -b feat/function-to-compute-differences
+git checkout -b fix/12-map-not-changing
+```
+
+**Incorrecto** :x:
+
+```bash
+git checkout -b wip-nuevos-colores-en-mapa
+git checkout -b feat/NewColorSchemeForMaps
+```
+
+### 3.2.2. Convención de versionado
+
+En el caso de las ramas `release/`, estas siempre recibirán como nombre la versión del producto. Los proyectos de DataInt usarán [CalVer](https://calver.org/) como la convención de versionado. Esta convención está basada en fechas de liberación y no en un identificador incremental (como Ubuntu, ECMAScript o Pip).
+
+La versión de proyectos de DataInt seguirá el siguiente patrón: `YY.0M.MINOR-PRE`, donde `YY` es el año a dos dígitos, `0M` es el mes en número y con prefijo cero (`08`, `09`, `10`, etc.), `MINOR` es un indicativo de la "versión menor" del producto, es decir, parches y reparaciones que no rompen la compatibilidad del producto, y `PRE` es un identificador de acceso temprano (_pre-release_) que puede ser `alpha`, `beta` o `rc`.
+
+`PRE` es el único componente opcional y sólo será usado cuando las características del proyecto así lo requieran. 
+
+**Correcto** :white_check_mark:
+
+```bash
+git checkout -b release/v21.12.0
+git checkout -b release/v22.01.0-alpha
+git checkout -b release/v22.01.0-rc
+```
+
+**Incorrecto** :x:
+
+```bash
+git checkout -b release/v22.7.1
+git checkout -b release/v0.0.1
+git checkout -b release/latest
+```
+
+## 3.3. Archivos de código fuente (_source files_)
+
+### 3.3.1. Codificación
 
 Todos los archivos deberán ser codificados en **UTF-8**.
 
