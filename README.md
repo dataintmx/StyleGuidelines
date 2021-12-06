@@ -105,9 +105,9 @@ Los nombres de las ramas en las que trabaja el programador deberán ser claros y
 
 **Deberá usarse el idioma inglés para nombrar las ramas de trabajo** y sólo puede usarse el guión medio `-` como separador de palabras. Las diagonales `/` se reservarán para etiquetas o categorías como prefijo del nombre de la rama.
 
-Los prefijos permitidos, como se estableció en la sección anterior, son: `feat/`, `fix/`, `release/` y `hotfix/`.
+Los prefijos permitidos, como se estableció en la sección anterior, son: `feat/`, `fix/`, `release/`, `bugfix/`, `doc/` y `hotfix/`.
 
-En el caso de parches o soluciones (`fix/` y `hotfix/`), el nombre de la rama debe empezar con el identificador de problema asignado por el sistema de _issues_ proporcionados por las plataformas de alojamiento de repositorios, como GitHub o GitLab.
+En el caso de parches o soluciones (`fix/`, `bugfix/` y `hotfix/`), el nombre de la rama debe empezar con el identificador de problema asignado por el sistema de _issues_ proporcionados por las plataformas de alojamiento de repositorios, como GitHub o GitLab.
 
 **Correcto** :white_check_mark:
 
