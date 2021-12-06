@@ -67,7 +67,19 @@ Si en la guía de estilo de DataInt no hay reglas específicas para un lenguaje 
 
 En esta sección se definen los lineamientos generales para escribir código en los proyectos de DataInt. Los lineamientos generales deberán seguirse, en la medida de lo posible, en todo los lenguajes de programación. Ante cualquier situación no cubierta en estos lineamientos generales, el programador deberá remitirse a los lineamientos específicos para su lenguaje de programación y, en su defecto, a una de las guías auxiliares.
 
-## 3.1. Archivos de código fuente (_source files_)
+## 3.1. Estructura de proyecto
+
+Al iniciarse un proyecto nuevo, el programador deberá crear un directorio en blanco donde se colocarán todos los archivos del proyecto. De igual forma, el programador deberá crear un repositorio de git en el directorio. Todos los proyectos de DataInt deberán usar git como _software_ de control de cambios, incluso cuando el proyecto no sea alojado en un servidor git (como GitHub).
+
+La implementación de parches, nuevas características, _hotfixes_, o cualquier modificación sobre un trabajo ya existente no requiere la creación de un nuevo espacio de trabajo (directorio + control de cambios), a menos que así sea expresamente indicado por el responsable del proyecto.
+
+En el nivel principal (_root_, `/`) del repositorio, siempre deberán estar presentes estos archivos:
+
+1. README: Un léeme con una descripción breve de los contenidos del repositorio.
+2. LICENSE: Un archivo con la nota de copyright, si el código del proyecto es propietario, o una licencia de código abierto, si el proyecto es _open source_. 
+
+El programador deberá evitar, en la medida de lo posible, incluir archivos de código fuente (_source files_) en el nivel principal (_root_, `/`) del proyecto. 
+
 
 ### 3.1.1. Codificación
 
