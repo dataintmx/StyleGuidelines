@@ -153,7 +153,7 @@ git checkout -b release/latest
 
 Todos los archivos deberán ser codificados en **UTF-8**.
 
-### 3.1.2. Nombre
+### 3.3.2. Nombre
 
 Los nombres de los archivos siempre deberán ser en minúsculas (_lowercase_) y podrán contener guiones medios ( `-` ) y bajos ( `_` ). 
 
@@ -161,7 +161,7 @@ Los nombres de archivo no podrán contener signos de puntuación adicionales a l
 
 Los nombres de archivos no podrán contener espacios en blanco.
 
-### 3.1.3. Estructura
+### 3.3.3. Estructura
 
 Los archivos con código deberán tener, en la medida de lo posible, la siguiente estructura:
 
@@ -172,11 +172,11 @@ Los archivos con código deberán tener, en la medida de lo posible, la siguient
 5. Importación de dependencias escritas por DataInt.
 6. Implementación.
 
-### 3.1.4. Copyright
+### 3.3.4. Copyright
 
 El copyright incluido en los archivos de código dependerá, principalmente, de dos cosas: 1) si la implementación puede ser redistribuida o no (código abierto o código propietario) y 2) si la implementación utiliza código abierto proporcionado por terceros. 
 
-El programador siempre deberá dirigirse al líder de proyecto para saber si la implementación que está produciendo será abierta o propietaria.
+El programador siempre deberá dirigirse al responsable de proyecto para saber si la implementación que está produciendo será abierta o propietaria.
 
 En caso que la implementación sea propietaria y no reutilice código abierto de terceros, la nota de copyright deberá ser la siguiente:
 
@@ -222,19 +222,19 @@ El programador deberá sustituir `{year}` con el año de la primer implementaci�
 
 **Es importante recordar que, en esta sección, cuando se habla de reutilización de código de terceros, se hace referencia a la redistribución de código.** Es decir, **si el programador importa librerías o paqueterías de terceros (sin importar la licencia bajo a cual se distribuyen), éste no está redistribuyendo código** y, por lo tanto, no es necesario hacer las respectivas atribuciones a sus autores originales y DataInt puede declarar que todos los derechos de propiedad intelectual le pertenecen. Sin embargo, si el programador copia código contenido en una librería distribuida por terceros (para hacerle modificaciones o mantenerlo íntegro), es necesario hacer las respectivas atribuciones y declarar que DataInt sólo mantiene algunos derechos de propiedad intelectual.
 
-### 3.1.5. Final de archivo
+### 3.3.5. Final de archivo
 
 Todos los archivos deberán terminar con un salto de línea (`\n`) o, en su defecto, un retorno de carro con nueva línea (`\rn`). 
 
-## 3.2. Disposición del código
+## 3.4. Disposición del código
 
-### 3.2.1. Longitud máxima de línea
+### 3.4.1. Longitud máxima de línea
 
 Las líneas de código deberán limitarse a **120 caracteres**.
 
 Las líneas de comentarios y documentación en código (_docstring_) deberán limitarse a **80 caracteres** para facilitar su legibilidad.
 
-### 3.2.2. Líneas en blanco
+### 3.4.2. Líneas en blanco
 
 Deberán colocarse una línea en blanco después de la nota de copyright al inicio del archivo.
 
@@ -311,13 +311,13 @@ class Persona {
 }
 ```
 
-### 3.2.3. Sangrado (_indentation_) y tabulación
+### 3.4.3. Sangrado (_indentation_) y tabulación
 
 Cada vez que se abre un nuevo bloque de código, se incrementa el **sangrado en 4 espacios en blanco** (`\s`). El sangrado del código deberá hacerse con espacios en blanco y deberá evitarse el uso de tabuladores (`\t`).
 
-## 3.3. Estilo de código
+## 3.5. Estilo de código
 
-### 3.3.1. Caracteres fuera de la especificación ASCII
+### 3.5.1. Caracteres fuera de la especificación ASCII
 
 Si el programador requiere usar caracteres fuera de la especificación ascii (como caracteres pertenecientes a alfabetos distintos al latino), el programador deberá escribirlo explícitamente y deberá evitar el uso de secuencias hexadecimales o códigos unicode con escape de texto.
 
@@ -335,7 +335,7 @@ const units = "μm";
 const units = "\u03bcm";
 ```
 
-### 3.3.2. Caracteres especiales
+### 3.5.2. Caracteres especiales
 
 Si el programador requiere usar caracteres especiales (como saltos de línea, tabulaciones, espacios en blanco, etc.), el programador deberá hacer uso de la secuencia de escape tradicional (`\"`, `\s`, `\t`, `\v`, etc.) en lugar de secuencias hexadecimales o códigos unicode con escape de texto.
 
@@ -353,9 +353,9 @@ const title = "Incidencia Delictiva\nMarzo de 2020";
 const title = "Incidencia Delictiva\x0aMarzo de 2020";
 ```
 
-### 3.3.3. Comentarios y documentación en código
+### 3.5.3. Comentarios y documentación en código
 
-#### 3.3.3.1. Comentarios
+#### 3.5.3.1. Comentarios
 
 Todo el código debe comentarse. El programador siempre debe tener en mente que debe dejar una nota describiendo qué hacen sus funciones, declaraciones, clases, métodos e importaciones, siempre que éstas no sean explícitas y descriptivas. Estas notas deben ser suficientemente claras para que, otros colaboradores del proyecto (dentro y fuera de DataInt), puedan entender el código que están leyendo.
 
@@ -388,7 +388,7 @@ Cras in feugiat arcu. In vehicula est ligula, eu efficitur libero aliquam vel.
 /* Don't use block comment notation for single line comments! */
 ```
 
-#### 3.3.3.2. Documentación en código (_docstring_)
+#### 3.5.3.2. Documentación en código (_docstring_)
 
 En idiomas de programación que permiten el uso de _docstrings_, o cadenas de documentación en código, el programador deberá hacer uso de esta herramienta. El uso de _docstrings_ no menoscabará, ni remplazará, el uso de comentarios para describir el código.
 
@@ -398,7 +398,7 @@ Toda documentación en código deberá contener, por lo menos, los siguientes el
 2. Nombre de los parámetros requeridos, su tipo y una breve descripción.
 3. Tipo del objeto devuelto (_return_) y descripción.
 
-### 3.3.4. Nomenclatura
+### 3.5.4. Nomenclatura
 
 Los nombres de objetos, funciones, métodos y clases **sólo podrán escribirse usando caracteres ASCII** (esto incluye el uso de acentos y la letra "ñ"). **Los nombres deben ser en inglés**. En el caso excepcional de que sean en castellano, se recomienda seguir las reglas de ortografía (es decir, acentuar correctamente y evitar la sustitución de `ñ` por `ni`: `año -> anio`).
 
@@ -409,37 +409,37 @@ El programador podrá hacer excepciones a lo anterior en los siguientes casos:
 1. En el caso de funciones estadísticas donde hay un uso razonablemente común de letras (latinas y griegas) para designar algunos objetos. Por ejemplo, las medias tienden a denotarse `m` o `mu`, la desviación estándar `s`, el tamaño de muestra `n`, la probabilidad `p` o `pi`, etc.
 2. En el caso de iteradores, se permitirá el uso de las letras `c`, `i`, `j`, `k`, `r`, `x`, `y`, `z`, siempre y cuando sea en un bloque de código reducido y no haya otros bloques de iteración anidados.
 
-#### 3.3.4.1. Nomenclatura por tipo de identificador
+#### 3.5.4.1. Nomenclatura por tipo de identificador
 
-##### 3.3.4.1.1. Paquetes y módulos
+##### 3.5.4.1.1. Paquetes y módulos
 
 Los nombres de paquetes y módulos de código siempre deben ser `UpperCamelCase`. Por ejemplo: `DataIntAuth.Core.DataIntUser`.
 
-##### 3.3.4.1.2. Clases
+##### 3.5.4.1.2. Clases
 
 Los nombres de clases siempre deben ser `UpperCamelCase`. Por ejemplo: `DataIntUser`.
 
-##### 3.3.4.1.3. Métodos y funciones
+##### 3.5.4.1.3. Métodos y funciones
 
 Los nombres de métodos y funciones siempre deben ser `lower_snake_case`, por ejemplo `DataIntUser.create_token()`.
 
-##### 3.3.4.1.4. Variables y constantes globales
+##### 3.5.4.1.4. Variables y constantes globales
 
 Los nombres de variables y constantes globales —incluidas las de ambiente (_environment_)— deben ser `UPPER_SNAKE_CASE`.
 
-##### 3.3.4.1.5. Objetos privados
+##### 3.5.4.1.5. Objetos privados
 
 En idiomas de programación que no dispongan de una definición formal de objeto (propiedades, métodos, funciones, etc.) privado, éstas se denotarán con un guión bajo como prefijo ( `_` ). Por ejemplo: `_propiedad_privada`.
 
-##### 3.3.4.1.6. Parámetros
+##### 3.5.4.1.6. Parámetros
 
 Los parámetros de funciones y constructores de clase se escribirán en `lower_snake_case`.
 
-##### 3.3.4.1.7. Variables y constantes locales
+##### 3.5.4.1.7. Variables y constantes locales
 
 Los nombres de variables y constantes locales se escribirán en `lower_snake_case`.
 
-### 3.3.5. Uso de espacios en expresiones y declaraciones
+### 3.5.5. Uso de espacios en expresiones y declaraciones
 
 Al menos que el lenguaje de programación asi lo requiera, deberá evitarse añadir espacios en blanco inmediatamente al interior de paréntesis o llaves.
 
