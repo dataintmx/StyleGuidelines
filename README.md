@@ -402,9 +402,12 @@ Toda documentación en código deberá contener, por lo menos, los siguientes el
 
 Los nombres de objetos, funciones, métodos y clases **sólo podrán escribirse usando caracteres ASCII** (esto incluye el uso de acentos y la letra "ñ"). **Los nombres deben ser en inglés**. En el caso excepcional de que sean en castellano, se recomienda seguir las reglas de ortografía (es decir, acentuar correctamente y evitar la sustitución de `ñ` por `ni`: `año -> anio`).
 
-El programador, en la medida de lo posible, siempre debe priorizar el uso de **nombres completos y descriptivos de los objetos**, funciones, métodos y clases en el código. Es decir, el programador debe evitar abreviaciones ambiguas, siglas y acrónimos ambiguos, así como la remoción de vocales. De igual forma, debe evitarse el uso de [notación húngara](https://en.wikipedia.org/wiki/Hungarian_notation). 
+El programador, en la medida de lo posible, siempre debe priorizar el uso de **nombres completos y descriptivos de los objetos**, funciones, métodos y clases en el código. Es decir, el programador debe evitar usar letras individuales, abreviaciones ambiguas, siglas y acrónimos ambiguos, así como la remoción de vocales. De igual forma, debe evitarse el uso de [notación húngara](https://en.wikipedia.org/wiki/Hungarian_notation). 
 
-El programador podrá hacer excepciones en el caso de funciones estadísticas donde hay un uso razonablemente común de letras (latinas y griegas) para designar algunos objetos. Por ejemplo, las medias tienden a denotarse `mu`, la desviación estándar `s`, el tamaño de muestra `n`, la probabilidad `p` o `pi`, etc.
+El programador podrá hacer excepciones a lo anterior en los siguientes casos:
+
+1. En el caso de funciones estadísticas donde hay un uso razonablemente común de letras (latinas y griegas) para designar algunos objetos. Por ejemplo, las medias tienden a denotarse `m` o `mu`, la desviación estándar `s`, el tamaño de muestra `n`, la probabilidad `p` o `pi`, etc.
+2. En el caso de iteradores, se permitirá el uso de las letras `c`, `i`, `j`, `k`, `r`, `x`, `y`, `z`, siempre y cuando sea en un bloque de código reducido y no haya otros bloques de iteración anidados.
 
 #### 3.3.4.1. Nomenclatura por tipo de identificador
 
