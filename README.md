@@ -75,7 +75,7 @@ La implementación de parches, nuevas características, _hotfixes_, o cualquier 
 
 En el nivel principal (_root_, `/`) del repositorio, siempre deberán estar presentes estos archivos:
 
-1. README: Un léeme con una descripción breve de los contenidos del repositorio.
+1. README: Un archivo de texto con una descripción breve de los contenidos y datos relevantes del repositorio.
 2. LICENSE: Un archivo con la nota de copyright, si el código del proyecto es propietario, o una licencia de código abierto, si el proyecto es _open source_. 
 
 El programador deberá evitar, en la medida de lo posible, incluir archivos de código fuente (_source files_) en el nivel principal (_root_, `/`) del proyecto. 
@@ -96,14 +96,15 @@ El programador deberá tener en cuenta las siguientes reglas al momento de traba
 10. Para el arreglo de _bugs_ y otros problemas en el código detectados en la rama `release/*`, el programador deberá crear una rama `bugfix/*` a partir de `release/*`. Una vez terminada la implementación del parche, el programador deberá hacer un _merge_ con la rama de entrega `release/*` o, en su defecto, solicitar un _pull request_ o un _merge request_ al responsable de proyecto (según las reglas previamente definidas del proyecto).
 11. En algunos proyectos será necesario liberar versiones de acceso temprano para realizar pruebas directamente con clientes o con otras áreas de DataInt. En estos casos, el equipo de desarrollo podrá montar la aplicación o servicio directamente desde la última rama `release/*`. Los parches para problemas detectados en esta prueba de etapas sobre acceso temprano se realizarán conforme a lo estipulado en el punto 9 de estos lineamientos. 
 12. Cuando el responsable de proyecto así lo indique, y el _software_ esté listo para entrega, se hará un _merge_ entre la rama `release/*` y el `master` del repositorio.
-13. Si el equipo de desarrollo detecta un problema en la última versión del código disponible en la rama `master`, podrá realizarse un parche directamente sobre esta rama. Este tipo de parches deberán realizarse en una rama `hotfix/*` que se bifurcará directamente de `master` y deberá ser fusionada directamente con ésta (previa autorización del responsable del proyecto o vía _pull request_). Los parches `hotfix/*` sólo deberán ser aplicados en los siguientes casos: i) cuando el equipo de desarrollo no programe otro _release_ del producto en un periodo menor a 30 días y ii) cuando la implementación del `hotfix/*` propuesto sea razonablemente menor y no tenga un impacto directo en el usuario final.
-14. Los equipos de desarrollo deberán dar seguimiento a errores y problemas en el código usando los sistemas de _issues_ proporcionados por las plataformas de alojamiento de repositorios, como GitHub o GitLab.
+13. Si el equipo de desarrollo detecta un problema en la última versión del código disponible en la rama `master`, podrá realizarse un parche directamente sobre esta rama. Este tipo de parches deberán realizarse en una rama `hotfix/*` que se bifurcará directamente de `master` y deberá ser fusionada directamente con ésta (previa autorización del responsable del proyecto o vía _pull request_). Los parches `hotfix/*` sólo deberán ser aplicados en los siguientes casos: i) cuando el equipo de desarrollo no programe otro _release_ del producto en un periodo menor a 30 días y ii) cuando la implementación del `hotfix/*` propuesto sea razonablemente menor y no tenga un impacto directo en el usuario final. iii) cuando la implementación del `hotfix/*` propuesto solucione un error crítico que afecte al proyecto
+14. En caso de que dos o más miembros del equipo de desarrollo trabajen sobre un mismo cambio, sea una nueva característica o fix, deberán crear una rama principal y bifucar dicha rama en la cantidad de miembros que están realizando el cambio utilizando el mismo nombre de la rama principal agregando al final su nombre o alias. Cada integrante deberá hacer un _merge_ con la rama principal o, en su defecto, solicitar un _pull request_ o un _merge request_ entre los responsables del cambio y cuando la rama principal se incluyan todos los cambios se debe hacer un _merge_ con la rama correspondiente o, en su defecto, solicitar un _pull request_ o un _merge request_ al responsable de proyecto (según las reglas previamente definidas del proyecto)
+15. Los equipos de desarrollo deberán dar seguimiento a errores y problemas en el código usando los sistemas de _issues_ proporcionados por las plataformas de alojamiento de repositorios, como GitHub o GitLab.
 
 ### 3.2.1. Nomenclatura
 
-Los nombres de las ramas en las que trabaja el programador deberán ser claros y descriptivos del trabajo realizado, evitando, en la medida de lo posible, abreviaciones o siglas ambiguas. 
+Los nombres de las ramas en las que trabaja el programador deberán ser claros y descriptivos del trabajo realizado, evitando, en la medida de lo posible, abreviaciones o siglas ambiguas.
 
-**Deberá usarse el idioma inglés para nombrar las ramas de trabajo** y sólo puede usarse el guión medio `-` como separador de palabras. Las diagonales `/` se reservarán para etiquetas o categorías como prefijo del nombre de la rama.
+**Deberá usarse el idioma inglés para nombrar las ramas de trabajo** y sólo puede usarse el guión medio `-` como separador de palabras. Las diagonales `/` se reservarán para etiquetas o categorías como prefijo del nombre de la rama. Quedan estrictamente prohibidos los acentos.
 
 Los prefijos permitidos, como se estableció en la sección anterior, son: `feat/`, `fix/`, `release/`, `bugfix/`, `doc/` y `hotfix/`.
 
@@ -121,6 +122,23 @@ git checkout -b fix/12-map-not-changing
 ```bash
 git checkout -b wip-nuevos-colores-en-mapa
 git checkout -b feat/NewColorSchemeForMaps
+```
+
+En el caso de cambios en conjunto, el nombre de la rama principal debe contener las reglas de nomenclatura anteriores y en las ramas personales de cada integrante se debe agregar al final su nombre o alias.
+
+**Correcto** :white_check_mark:
+
+```bash
+git checkout -b feat/function-to-compute-differences
+git checkout -b feat/function-to-compute-differences-pedro
+git checkout -b feat/function-to-compute-differences-njuarez
+```
+
+**Incorrecto** :x:
+
+```bash
+git checkout -b feat/function-to-compute-differences-personal-1
+git checkout -b feat/njuarez
 ```
 
 ### 3.2.2. Convención de versionado
@@ -425,7 +443,7 @@ Los nombres de métodos y funciones siempre deben ser `lower_snake_case`, por ej
 
 ##### 3.5.4.1.4. Variables y constantes globales
 
-Los nombres de variables y constantes globales —incluidas las de ambiente (_environment_)— deben ser `UPPER_SNAKE_CASE`.
+Los nombres de variables y constantes globales —incluidas las de ambiente (_environment_)— deben ser `UPPER_SNAKE_CASE`, por ejemplo  `MAX_LENGTH`.
 
 ##### 3.5.4.1.5. Objetos privados
 
