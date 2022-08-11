@@ -2,38 +2,38 @@
 
 - [1. Introducción](#1-introducción)
 - [2. Guías auxiliares](#2-guías-auxiliares)
-    - [2.1. Listado de guías auxiliares](#21-listado-de-guías-auxiliares)
+  - [2.1. Listado de guías auxiliares](#21-listado-de-guías-auxiliares)
 - [3. Lineamientos generales](#3-lineamientos-generales)
-    - [3.1. Estructura de proyecto](#31-estructura-de-proyecto)
-    - [3.2. Flujo de trabajo con sistema de control de versiones](#32-flujo-de-trabajo-con-sistema-de-control-de-versiones)
-        - [3.2.1. Nomenclatura](#321-nomenclatura)
-        - [3.2.2. Convención de versionado](#322-convención-de-versionado)
-    - [3.3. Archivos de código fuente (_source files_)](#33-archivos-de-código-fuente-source-files)
-        - [3.3.1. Codificación](#331-codificación)
-        - [3.3.2. Nombre](#332-nombre)
-        - [3.3.3. Estructura](#333-estructura)
-        - [3.3.4. Final de archivo](#335-final-de-archivo)
-    - [3.4. Disposición del código](#34-disposición-del-código)
-        - [3.4.1. Longitud máxima de línea](#341-longitud-máxima-de-línea)
-        - [3.4.2. Tamaño y estructura de las clases](#342-tamaño-y-estructura-de-las-clases)
-        - [3.4.3. Líneas en blanco](#343-líneas-en-blanco)
-        - [3.4.4. Sangrado (_indentation_) y tabulación](#344-sangrado-indentation-y-tabulación)
-    - [3.5. Estilo de código](#35-estilo-de-código)
-        - [3.5.1. Caracteres fuera de la especificación ASCII](#351-caracteres-fuera-de-la-especificación-ascii)
-        - [3.5.2. Caracteres especiales](#352-caracteres-especiales)
-        - [3.5.3. Comentarios y documentación en código](#353-comentarios-y-documentación-en-código)
-            - [3.5.3.1. Comentarios](#3531-comentarios)
-            - [3.5.3.2. Documentación en código (_docstring_)](#3532-documentación-en-código-docstring)
-        - [3.5.4. Nomenclatura](#354-nomenclatura)
-            - [3.5.4.1. Nomenclatura por tipo de identificador](#3541-nomenclatura-por-tipo-de-identificador)
-                - [3.5.4.1.1. Paquetes y módulos](#35411-paquetes-y-módulos)
-                - [3.5.4.1.2. Clases](#35412-clases)
-                - [3.5.4.1.3. Métodos y funciones](#35413-métodos-y-funciones)
-                - [3.5.4.1.4. Variables y constantes globales](#35414-variables-y-constantes-globales)
-                - [3.5.4.1.5. Objetos privados](#35415-objetos-privados)
-                - [3.5.4.1.6. Parámetros](#35416-parámetros)
-                - [3.5.4.1.7. Variables y constantes locales](#35417-variables-y-constantes-locales)
-        - [3.5.5. Uso de espacios en expresiones y declaraciones](#355-uso-de-espacios-en-expresiones-y-declaraciones)
+  - [3.1. Estructura de proyecto](#31-estructura-de-proyecto)
+  - [3.2. Flujo de trabajo con sistema de control de versiones](#32-flujo-de-trabajo-con-sistema-de-control-de-versiones)
+    - [3.2.1. Nomenclatura](#321-nomenclatura)
+    - [3.2.2. Convención de versionado](#322-convención-de-versionado)
+  - [3.3. Archivos de código fuente (_source files_)](#33-archivos-de-código-fuente-source-files)
+    - [3.3.1. Codificación](#331-codificación)
+    - [3.3.2. Nombre](#332-nombre)
+    - [3.3.3. Estructura](#333-estructura)
+    - [3.3.4. Final de archivo](#334-final-de-archivo)
+  - [3.4. Disposición del código](#34-disposición-del-código)
+    - [3.4.1. Longitud máxima de línea](#341-longitud-máxima-de-línea)
+    - [3.4.2. Tamaño y estructura de las clases](#342-tamaño-y-estructura-de-las-clases)
+    - [3.4.3. Líneas en blanco](#343-líneas-en-blanco)
+    - [3.4.4. Sangrado (_indentation_) y tabulación](#344-sangrado-indentation-y-tabulación)
+  - [3.5. Estilo de código](#35-estilo-de-código)
+    - [3.5.1. Caracteres fuera de la especificación ASCII](#351-caracteres-fuera-de-la-especificación-ascii)
+    - [3.5.2. Caracteres especiales](#352-caracteres-especiales)
+    - [3.5.3. Comentarios y documentación en código](#353-comentarios-y-documentación-en-código)
+      - [3.5.3.1. Comentarios](#3531-comentarios)
+      - [3.5.3.2. Documentación en código (_docstring_)](#3532-documentación-en-código-docstring)
+    - [3.5.4. Nomenclatura](#354-nomenclatura)
+      - [3.5.4.1. Nomenclatura por tipo de identificador](#3541-nomenclatura-por-tipo-de-identificador)
+        - [3.5.4.1.1. Paquetes y módulos](#35411-paquetes-y-módulos)
+        - [3.5.4.1.2. Clases](#35412-clases)
+        - [3.5.4.1.3. Métodos y funciones](#35413-métodos-y-funciones)
+        - [3.5.4.1.4. Variables y constantes globales](#35414-variables-y-constantes-globales)
+        - [3.5.4.1.5. Objetos privados](#35415-objetos-privados)
+        - [3.5.4.1.6. Parámetros](#35416-parámetros)
+        - [3.5.4.1.7. Variables y constantes locales](#35417-variables-y-constantes-locales)
+    - [3.5.5. Uso de espacios en expresiones y declaraciones](#355-uso-de-espacios-en-expresiones-y-declaraciones)
 
 # 1. Introducción
 
@@ -153,8 +153,8 @@ El programador deberá tener en cuenta las siguientes reglas al momento de traba
 ### 3.2.1. Nomenclatura
 
 Los nombres de las ramas en las que trabaja el programador deberán ser claros y descriptivos del trabajo realizado,
-evitando, en la medida de lo posible, abreviaciones o siglas **solo se permite el uso de siglas reconocidas de forma
-internacional**.
+evitando, en la medida de lo posible, abreviaciones o siglas. 
+**Solo se permitirá el uso de siglas reconocidas de forma internacional**.
 
 **Deberá usarse el idioma inglés para nombrar las ramas de trabajo** y solo puede usarse el guion medio `-` como
 separador de palabras. Las diagonales `/` se reservarán para etiquetas o categorías como prefijo del nombre de la rama.
@@ -251,7 +251,8 @@ su legibilidad.
 
 ### 3.4.2. Tamaño y estructura de las clases
 
-Las clases deben limitarse en lo posible a 500 líneas de código, 5 atributos, 20 métodos de hasta 25 líneas de código.
+Las clases deben limitarse, en la medida de lo posible, a 500 líneas de código, 5 atributos y 20 métodos de hasta 25 
+líneas de código.
 
 ### 3.4.3. Líneas en blanco
 
@@ -359,17 +360,10 @@ const title = "Incidencia Delictiva\x0aMarzo de 2020";
 
 #### 3.5.3.1. Comentarios
 
-Solamente se debe comentar las instrucciones que debido a su complejidad son difíciles de comprender **(Ejemplo:
-Expresiones regulares)**,
-siendo prioridad mantener su actualización ante cualquier cambio. Por lo tanto, los nombres de las clases, propiedades y
-métodos deben ser
-lo suficientemente claros y descriptivos para que tomen el espacio de los comentarios.
-
-Únicamente se debe documentar todo el código, cuando se escriba alguna librería y resulta necesario aprovechar las
-facilidades de la
-documentación automática. Esta documentación deben ser suficientemente claras para que otros colaboradores del
-proyecto (dentro y fuera de
-DataInt), puedan entender el código que están leyendo.
+Solamente se debe comentar las instrucciones que, debido a su complejidad, son difíciles de comprender 
+(por ejemplo: expresiones regulares). En estos casos, debe priorizarse la actualización de estos comentarios 
+después de aplicar un cambio. Por lo tanto, **los nombres de las clases, propiedades y métodos deben ser
+lo suficientemente claros y descriptivos para que no sea necesario comentar el código**.
 
 **Los comentarios en el código siempre deberán escribirse en inglés**.
 
@@ -404,9 +398,13 @@ Cras in feugiat arcu. In vehicula est ligula, eu efficitur libero aliquam vel.
 
 #### 3.5.3.2. Documentación en código (_docstring_)
 
-En idiomas de programación que permiten el uso de _docstrings_, o cadenas de documentación en código, el programador
-deberá hacer uso de esta herramienta. El uso de _docstrings_ no menoscabará, ni remplazará, el uso de comentarios para
-describir el código.
+Únicamente en proyectos donde se implementen librerías nuevas y resulte necesario aprovechar las
+herramientas de documentación automática a través de _docstring_, los desarrolladores harán uso de _docstring_. 
+Esta documentación deben ser suficientemente claras para que otros colaboradores del proyecto (dentro y fuera de
+DataInt), puedan entender el código que están leyendo.
+
+El uso de _docstrings_ no menoscabará, ni remplazará, el uso de comentarios para
+describir el código cuando sea necesario.
 
 Toda documentación en código deberá contener, por lo menos, los siguientes elementos:
 
@@ -416,7 +414,7 @@ Toda documentación en código deberá contener, por lo menos, los siguientes el
 
 ### 3.5.4. Nomenclatura
 
-Los nombres de objetos, funciones, métodos y clases **solo podrán escribirse usando caracteres ASCII** (esto incluye el
+Los nombres de objetos, funciones, métodos y clases **sólo podrán escribirse usando caracteres ASCII** (esto incluye el
 uso de acentos y la letra "ñ"). **Los nombres deben ser en inglés**. En el caso excepcional de que sean en castellano,
 se recomienda seguir las reglas de ortografía (es decir, acentuar correctamente y evitar la sustitución de `ñ`
 por `ni`: `año -> anio`).
@@ -457,7 +455,7 @@ Los nombres de variables y constantes globales —incluidas las de ambiente (_en
 ##### 3.5.4.1.5. Objetos privados
 
 En idiomas de programación que no dispongan de una definición formal de objeto (propiedades, métodos, funciones, etc.)
-privado, estas se denotarán con un guion bajo como prefijo ( `_` ). Por ejemplo: `_propiedad_privada`.
+privado, éstas se denotarán con un guion bajo como prefijo ( `_` ). Por ejemplo: `_propiedad_privada`.
 
 ##### 3.5.4.1.6. Parámetros
 
@@ -481,7 +479,7 @@ const my_formula = x_1 + x_2 * b_2 + x_3 * (b_3 + c);
 **Incorrecto** :x:
 
 ```js
-const my_formula = x_1 + x_2 * b_2 + x_3 * (b_3 + c);
+const my_formula = x_1 + x_2 * b_2 + x_3 * ( b_3 + c );
 ```
 
 Al menos que el lenguaje de programación así lo requiera, deberá evitarse añadir espacios en blanco después de una coma
@@ -496,7 +494,7 @@ var array = [1, 3, 3,];
 **Incorrecto** :x:
 
 ```js
-var array = [1, 3, 3,];
+var array = [1, 3, 3, ];
 ```
 
 Al menos que el lenguaje de programación así lo requiera, deberá evitarse añadir espacios en blanco inmediatamente antes
@@ -511,7 +509,7 @@ var array = [1, 3, 3];
 **Incorrecto** :x:
 
 ```js
-var array = [1, 3, 3];
+var array = [1 , 3 , 3];
 ```
 
 Deberá evitarse añadir espacios en blanco para alinear expresiones en el archivo.
@@ -527,8 +525,8 @@ const long_const_name = 99;
 **Incorrecto** :x:
 
 ```js
-const a = 1;
-const b = 2;
+const a               = 1;
+const b               = 2;
 const long_const_name = 99;
 ```
 
@@ -546,7 +544,7 @@ const a_bigger_than_b = a > b;
 **Incorrecto** :x:
 
 ```js
-const a = 1;
-const b = 2;
-const a_bigger_than_b = a > b;
+const a=1;
+const b=2;
+const a_bigger_than_b=a>b;
 ```
