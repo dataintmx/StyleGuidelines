@@ -1,2 +1,4 @@
-# Ignore VS code files
+# Ignore IDE files
 .vscode
+.idea
+._config.yml
