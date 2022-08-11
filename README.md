@@ -34,6 +34,9 @@
         - [3.5.4.1.6. Parámetros](#35416-parámetros)
         - [3.5.4.1.7. Variables y constantes locales](#35417-variables-y-constantes-locales)
     - [3.5.5. Uso de espacios en expresiones y declaraciones](#355-uso-de-espacios-en-expresiones-y-declaraciones)
+- [4. Archivos de configuración](#4-archivos-de-configuración)
+  - [4.1. Python](#41-python)
+    - [4.1.1. Pylint](#411-pylint)
 
 # 1. Introducción
 
@@ -46,13 +49,15 @@ verse el código. Es imposible cubrir todos los casos y situaciones en un solo d
 siempre tiene la última palabra; con su experiencia y conocimientos, juzgará cómo aplicar la guía y en qué situaciones
 pueden hacerse excepciones a los lineamientos que en ella se presentan.
 
-Esta guía esta divida en tres partes. En primer lugar, se define un grupo de guías auxiliares para lenguajes de
+Esta guía esta divida en cuatro partes. En primer lugar, se define un grupo de guías auxiliares para lenguajes de
 programación en específico. Estas deberán usarse para complementar los lineamientos de esta guía y solo deberán usarse
 en aquellos casos que no se encuentran contemplados en este documento. En segundo lugar, se presentan los lineamientos
 generales de la organización. Aquí se definen algunas reglas básicas para trabajar en los proyectos de DataInt. Estas
 reglas deberán seguirse, en la medida de lo posible, en todos los lenguajes de programación. En la tercera parte, se
 definen reglas específicas para cada lenguaje de programación. Si una regla específica para un lenguaje de programación
 entra en conflicto con un lineamiento general, la regla específica tendrá preferencia sobre el lineamiento general.
+Finalmente, en la cuarta parte se presentan archivos de configuración que pueden usarse con IDEs y otras herramientas
+de análisis de código estático ([_linters_](https://en.wikipedia.org/wiki/Lint_(software))) para detectar inconsistencias y violaciones a las recomendaciones de esta guía.
 
 # 2. Guías auxiliares
 
@@ -548,3 +553,11 @@ const a=1;
 const b=2;
 const a_bigger_than_b=a>b;
 ```
+
+# 4. Archivos de configuración
+
+## 4.1. Python
+
+### 4.1.1. Pylint
+
+El archivo de configuración para pylint puede descargarse [aquí](./Config/.pylintrc).
