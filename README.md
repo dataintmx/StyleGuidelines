@@ -50,6 +50,18 @@ people and by coding agents: every rule has a stable ID, a level and, whenever p
 | [PY-DEP-002](rules/python/dependencies.md#py-dep-002--build-images-from-the-lock-file) | Build images from the lock file | MUST |
 | [PY-TST-001](rules/python/testing.md#py-tst-001--run-pytest-with-coverage-and-junit-reports-in-ci) | Run pytest with coverage and JUnit reports in CI | MUST |
 | [PY-TST-002](rules/python/testing.md#py-tst-002--test-against-ephemeral-services-and-fixtures-never-shared-databases) | Test against ephemeral services and fixtures, never shared databases | MUST |
+| [TS-STY-001](rules/typescript.md#ts-sty-001--format-with-the-shared-prettier-configuration) | Format with the shared Prettier configuration | MUST |
+| [TS-STY-002](rules/typescript.md#ts-sty-002--import-through-the-alias-in-a-fixed-order) | Import through the `@/*` alias in a fixed order | MUST |
+| [TS-CFG-001](rules/typescript.md#ts-cfg-001--compile-in-strict-mode-and-type-check-with-no-emit) | Compile in strict mode and type-check with no emit | MUST |
+| [TS-LNT-001](rules/typescript.md#ts-lnt-001--lint-hooks-unused-variables-and-complexity-as-errors) | Lint hooks, unused variables and complexity as errors | MUST |
+| [TS-TYP-001](rules/typescript.md#ts-typ-001--do-not-use-any-use-unknown-and-narrow) | Do not use `any`; use `unknown` and narrow | MUST |
+| [TS-TYP-002](rules/typescript.md#ts-typ-002--declare-shared-types-in-types-and-keep-functions-out-of-them) | Declare shared types in `types/` and keep functions out of them | MUST |
+| [TS-ARC-001](rules/typescript.md#ts-arc-001--separate-presentation-from-logic) | Separate presentation from logic | MUST |
+| [TS-ARC-002](rules/typescript.md#ts-arc-002--keep-the-data-access-layer-thin-and-handle-errors-in-the-hook) | Keep the data-access layer thin and handle errors in the hook | SHOULD |
+| [TS-NAM-001](rules/typescript.md#ts-nam-001--follow-the-naming-and-export-conventions) | Follow the naming and export conventions | MUST |
+| [TS-INT-001](rules/typescript.md#ts-int-001--key-translations-by-namespace-and-update-every-locale) | Key translations by namespace and update every locale | MUST |
+| [TS-SEC-001](rules/typescript.md#ts-sec-001--supply-secrets-and-environment-values-through-environment-variables) | Supply secrets and environment values through environment variables | MUST |
+| [TS-TST-001](rules/typescript.md#ts-tst-001--pass-the-quality-gates-before-opening-a-pull-request) | Pass the quality gates before opening a pull request | MUST |
 | [TF-K8S-001](rules/terraform.md#tf-k8s-001--http-deployments-declare-startup-readiness-and-liveness-probes) | HTTP deployments declare startup, readiness and liveness probes | MUST |
 | [TF-K8S-002](rules/terraform.md#tf-k8s-002--probe-celery-workers-with-the-heartbeat-file) | Probe Celery workers with the heartbeat file | MUST |
 | [TF-K8S-003](rules/terraform.md#tf-k8s-003--roll-out-with-max_unavailable--0-and-max_surge--1) | Roll out with `max_unavailable = 0` and `max_surge = 1` | MUST |
@@ -82,7 +94,7 @@ Format: `<SCOPE>-<TOPIC>-<NNN>`.
 - Scope: 2–3 letters. `GEN`, `PY`, `TS`, `TF`, `DKR`, `SH`, `CSS`, `CI`.
 - Topic: 3 letters. `CMT` comments, `CFG` configuration, `LOG` logging, `OBS` observability, `RUN` runtime, `CEL`
   Celery, `DEP` dependencies, `NAM` names, `STY` formatting, `TST` tests, `K8S` Kubernetes, `SEC` secrets, `PIP`
-  pipeline, `DPL` deploy.
+  pipeline, `DPL` deploy, `LNT` lint, `TYP` types, `ARC` architecture, `INT` internationalization.
 - Number: 3 digits.
 
 Properties:
