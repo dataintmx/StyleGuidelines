@@ -8,6 +8,7 @@ internationalization. Workflow rules (branches, commits, pull requests, versioni
 |---|---|---|
 | [GEN-CMT-001](#gen-cmt-001--do-not-write-comments-in-code) | Do not write comments in code | MUST |
 | [GEN-CFG-001](#gen-cfg-001--keep-limits-timeouts-and-origins-in-a-dedicated-config-module) | Keep limits, timeouts and origins in a dedicated config module | MUST |
+| [GEN-SEC-001](#gen-sec-001--keep-secrets-out-of-the-repository-issues-pull-requests-logs-and-urls) | Keep secrets out of the repository, issues, pull requests, logs and URLs | MUST |
 
 ### GEN-CMT-001 — Do not write comments in code
 
@@ -62,4 +63,32 @@ Incorrect:
 ```python
 response = httpx.get("https://api.example.com/v1/event", timeout=120)
 app.add_middleware(CORSMiddleware, allow_origins=["https://app.example.com"])
+```
+
+### GEN-SEC-001 — Keep secrets out of the repository, issues, pull requests, logs and URLs
+
+- **Level:** MUST
+- **Applies to:** all languages, all repositories
+- **Enforced by:** `gitleaks` in pre-commit; code review
+- **Why:** a secret that reaches a commit, an issue, a pull request, a log line or a URL stays in history, caches and third-party systems, and must be treated as compromised and rotated. Secrets are delivered to the process as environment variables populated from a secrets manager. See also `TS-SEC-001`, `TS-SEC-002` and `PY-LOG-001`.
+- **Source:** Internal security standard.
+
+Correct:
+```yaml
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4
+    hooks:
+      - id: gitleaks
+```
+```python
+client = ApiClient(api_key=settings.api_key)
+```
+
+Incorrect:
+```bash
+curl "https://api.example.com/v1/items?token=${API_TOKEN}"
+```
+```python
+logger.info("request headers: %s", request.headers)
 ```

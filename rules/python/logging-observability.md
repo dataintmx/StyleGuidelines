@@ -12,6 +12,8 @@ Scope: `PY-LOG`, `PY-OBS`.
 | [PY-OBS-002](#py-obs-002--exclude-health-probes-and-the-metrics-route-from-the-access-log-and-traces) | Exclude health probes and the metrics route from the access log and traces | MUST |
 | [PY-OBS-003](#py-obs-003--bind-the-authenticated-user-in-an-async-dependency) | Bind the authenticated user in an async dependency | MUST |
 | [PY-OBS-004](#py-obs-004--propagate-w3c-trace-context-on-every-outbound-http-client) | Propagate W3C trace context on every outbound HTTP client | MUST |
+| [PY-OBS-005](#py-obs-005--run-prometheus-metrics-in-multiprocess-mode-with-several-workers) | Run Prometheus metrics in multiprocess mode with several workers | MUST |
+| [PY-OBS-006](#py-obs-006--label-metrics-by-route-template-not-by-url) | Label metrics by route template, not by URL | MUST |
 
 ### PY-LOG-001 — Use the standard logging configuration and never log credentials
 
@@ -231,4 +233,65 @@ Incorrect:
 ```python
 HTTPXClientInstrumentor().instrument()
 response = requests.get("https://api.example.com/v1/items", timeout=10)
+```
+
+### PY-OBS-005 — Run Prometheus metrics in multiprocess mode with several workers
+
+- **Level:** MUST
+- **Applies to:** services that expose Prometheus metrics and run more than one worker
+- **Enforced by:** code review; a scrape of `/metrics` under load that reflects the traffic of every worker
+- **Why:** each Gunicorn worker keeps its own in-memory registry, so a scrape would see only the worker that answered. With `PROMETHEUS_MULTIPROC_DIR` set, workers write to shared files and the `/metrics` route aggregates them. The directory is emptied at startup and `child_exit` marks dead workers so their gauges do not linger.
+- **Source:** Internal observability standard.
+
+Correct:
+```python
+metrics_dir = os.environ.get("PROMETHEUS_MULTIPROC_DIR")
+if metrics_dir:
+    shutil.rmtree(metrics_dir, ignore_errors=True)
+    os.makedirs(metrics_dir)
+
+
+def child_exit(server, worker):
+    if metrics_dir:
+        multiprocess.mark_process_dead(worker.pid)
+```
+```python
+def metrics_registry() -> CollectorRegistry:
+    if "PROMETHEUS_MULTIPROC_DIR" in os.environ:
+        registry = CollectorRegistry()
+        multiprocess.MultiProcessCollector(registry)
+    else:
+        registry = REGISTRY
+    return registry
+```
+
+Incorrect:
+```python
+@app.get("/metrics", include_in_schema=False)
+def metrics() -> Response:
+    return Response(generate_latest(REGISTRY), media_type=CONTENT_TYPE_LATEST)
+```
+with `workers = 2` and no `PROMETHEUS_MULTIPROC_DIR`.
+
+### PY-OBS-006 — Label metrics by route template, not by URL
+
+- **Level:** MUST
+- **Applies to:** all Python services that record request metrics
+- **Enforced by:** code review; check that the number of distinct `handler` label values stays bounded
+- **Why:** a label with the concrete URL creates one time series per identifier, which exhausts memory in the metrics backend. The route template (`/events/{event_id}`) has a fixed number of values.
+- **Source:** Internal observability standard.
+
+Correct:
+```python
+Instrumentator(should_group_untemplated=True).instrument(app)
+```
+```python
+REQUESTS = Counter("http_requests_total", "Requests", ["method", "route"])
+REQUESTS.labels(request.method, request.scope["route"].path).inc()
+```
+
+Incorrect:
+```python
+REQUESTS = Counter("http_requests_total", "Requests", ["method", "path"])
+REQUESTS.labels(request.method, request.url.path).inc()
 ```

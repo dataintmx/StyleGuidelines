@@ -32,6 +32,12 @@ people and by coding agents: every rule has a stable ID, a level and, whenever p
 |---|---|---|
 | [GEN-CMT-001](rules/general.md#gen-cmt-001--do-not-write-comments-in-code) | Do not write comments in code | MUST |
 | [GEN-CFG-001](rules/general.md#gen-cfg-001--keep-limits-timeouts-and-origins-in-a-dedicated-config-module) | Keep limits, timeouts and origins in a dedicated config module | MUST |
+| [GEN-SEC-001](rules/general.md#gen-sec-001--keep-secrets-out-of-the-repository-issues-pull-requests-logs-and-urls) | Keep secrets out of the repository, issues, pull requests, logs and URLs | MUST |
+| [PY-STY-001](rules/python/style-and-naming.md#py-sty-001--format-and-sort-imports-with-ruff-at-100-columns) | Format and sort imports with Ruff at 100 columns | MUST |
+| [PY-STY-002](rules/python/style-and-naming.md#py-sty-002--enable-the-minimum-ruff-rule-set) | Enable the minimum Ruff rule set | SHOULD |
+| [PY-NAM-001](rules/python/style-and-naming.md#py-nam-001--use-snake_case-pascalcase-and-upper_snake_case) | Use `snake_case`, `PascalCase` and `UPPER_SNAKE_CASE` | MUST |
+| [PY-CFG-001](rules/python/config.md#py-cfg-001--read-the-environment-only-in-a-cached-basesettings-class) | Read the environment only in a cached `BaseSettings` class | MUST |
+| [PY-CFG-002](rules/python/config.md#py-cfg-002--fail-at-startup-when-a-required-value-is-missing) | Fail at startup when a required value is missing | MUST |
 | [PY-LOG-001](rules/python/logging-observability.md#py-log-001--use-the-standard-logging-configuration-and-never-log-credentials) | Use the standard logging configuration and never log credentials | MUST |
 | [PY-LOG-002](rules/python/logging-observability.md#py-log-002--use-one-log-format-with-trace-and-span-ids) | Use one log format with trace and span IDs | MUST |
 | [PY-LOG-003](rules/python/logging-observability.md#py-log-003--configure-logging-before-telemetry-and-silence-the-server-access-loggers) | Configure logging before telemetry and silence the server access loggers | MUST |
@@ -40,6 +46,8 @@ people and by coding agents: every rule has a stable ID, a level and, whenever p
 | [PY-OBS-002](rules/python/logging-observability.md#py-obs-002--exclude-health-probes-and-the-metrics-route-from-the-access-log-and-traces) | Exclude health probes and the metrics route from the access log and traces | MUST |
 | [PY-OBS-003](rules/python/logging-observability.md#py-obs-003--bind-the-authenticated-user-in-an-async-dependency) | Bind the authenticated user in an async dependency | MUST |
 | [PY-OBS-004](rules/python/logging-observability.md#py-obs-004--propagate-w3c-trace-context-on-every-outbound-http-client) | Propagate W3C trace context on every outbound HTTP client | MUST |
+| [PY-OBS-005](rules/python/logging-observability.md#py-obs-005--run-prometheus-metrics-in-multiprocess-mode-with-several-workers) | Run Prometheus metrics in multiprocess mode with several workers | MUST |
+| [PY-OBS-006](rules/python/logging-observability.md#py-obs-006--label-metrics-by-route-template-not-by-url) | Label metrics by route template, not by URL | MUST |
 | [PY-RUN-001](rules/python/runtime-gunicorn.md#py-run-001--run-apis-with-gunicorn-and-gunicorn_configpy-migrate-outside-the-web-process) | Run APIs with Gunicorn and `gunicorn_config.py`; migrate outside the web process | MUST |
 | [PY-RUN-002](rules/python/runtime-gunicorn.md#py-run-002--recreate-connections-per-worker-and-close-them-on-exit) | Recreate connections per worker and close them on exit | MUST |
 | [PY-RUN-003](rules/python/runtime-gunicorn.md#py-run-003--keep-graceful_timeout-below-the-pod-termination-grace-period) | Keep `graceful_timeout` below the pod termination grace period | MUST |
@@ -50,6 +58,7 @@ people and by coding agents: every rule has a stable ID, a level and, whenever p
 | [PY-DEP-002](rules/python/dependencies.md#py-dep-002--build-images-from-the-lock-file) | Build images from the lock file | MUST |
 | [PY-TST-001](rules/python/testing.md#py-tst-001--run-pytest-with-coverage-and-junit-reports-in-ci) | Run pytest with coverage and JUnit reports in CI | MUST |
 | [PY-TST-002](rules/python/testing.md#py-tst-002--test-against-ephemeral-services-and-fixtures-never-shared-databases) | Test against ephemeral services and fixtures, never shared databases | MUST |
+| [PY-TST-003](rules/python/testing.md#py-tst-003--do-not-lower-coverage-by-more-than-2-points-against-the-base-branch) | Do not lower coverage by more than 2 points against the base branch | SHOULD |
 | [TS-STY-001](rules/typescript.md#ts-sty-001--format-with-the-shared-prettier-configuration) | Format with the shared Prettier configuration | MUST |
 | [TS-STY-002](rules/typescript.md#ts-sty-002--import-through-the-alias-in-a-fixed-order) | Import through the `@/*` alias in a fixed order | MUST |
 | [TS-CFG-001](rules/typescript.md#ts-cfg-001--compile-in-strict-mode-and-type-check-with-no-emit) | Compile in strict mode and type-check with no emit | MUST |
@@ -66,6 +75,24 @@ people and by coding agents: every rule has a stable ID, a level and, whenever p
 | [TF-K8S-001](rules/terraform.md#tf-k8s-001--http-deployments-declare-startup-readiness-and-liveness-probes) | HTTP deployments declare startup, readiness and liveness probes | MUST |
 | [TF-K8S-002](rules/terraform.md#tf-k8s-002--probe-celery-workers-with-the-heartbeat-file) | Probe Celery workers with the heartbeat file | MUST |
 | [TF-K8S-003](rules/terraform.md#tf-k8s-003--roll-out-with-max_unavailable--0-and-max_surge--1) | Roll out with `max_unavailable = 0` and `max_surge = 1` | MUST |
+| [TF-K8S-004](rules/terraform.md#tf-k8s-004--add-a-short-prestop-wait-to-http-deployments) | Add a short `preStop` wait to HTTP deployments | MUST |
+| [TF-K8S-005](rules/terraform.md#tf-k8s-005--ignore-image-and-env-changes-when-the-cicd-pipeline-owns-them) | Ignore image and env changes when the CI/CD pipeline owns them | MUST |
+| [TF-SEC-001](rules/terraform.md#tf-sec-001--deliver-secrets-through-external-secrets) | Deliver secrets through External Secrets | MUST |
+| [TF-LNT-001](rules/terraform.md#tf-lnt-001--run-terraform-fmt-validate-tflint-and-checkov-in-ci) | Run `terraform fmt`, `validate`, `tflint` and `checkov` in CI | MUST |
+| [TF-MOD-001](rules/terraform.md#tf-mod-001--declare-a-moved-block-when-renaming-a-module-or-adding-count) | Declare a `moved` block when renaming a module or adding `count` | MUST |
+| [DKR-IMG-001](rules/docker.md#dkr-img-001--build-in-several-stages-and-keep-build-tools-out-of-the-final-image) | Build in several stages and keep build tools out of the final image | MUST |
+| [DKR-IMG-002](rules/docker.md#dkr-img-002--pin-the-exact-base-image-version) | Pin the exact base image version | MUST |
+| [DKR-USR-001](rules/docker.md#dkr-usr-001--run-as-an-unprivileged-user) | Run as an unprivileged user | SHOULD |
+| [DKR-IGN-001](rules/docker.md#dkr-ign-001--exclude-git-metadata-env-files-dependencies-and-artifacts-with-dockerignore) | Exclude Git metadata, env files, dependencies and artifacts with `.dockerignore` | MUST |
+| [DKR-SEC-001](rules/docker.md#dkr-sec-001--never-pass-secrets-through-arg-or-env) | Never pass secrets through `ARG` or `ENV` | MUST |
+| [SH-SAF-001](rules/shell.md#sh-saf-001--start-with-the-env-bash-shebang-and-set--euo-pipefail) | Start with the `env bash` shebang and `set -euo pipefail` | MUST |
+| [SH-SAF-002](rules/shell.md#sh-saf-002--quote-expansions-and-use-arrays-for-argument-lists) | Quote expansions and use arrays for argument lists | MUST |
+| [SH-SEC-001](rules/shell.md#sh-sec-001--pass-secrets-through-stdin-or-a-restricted-file-never-as-an-argument) | Pass secrets through stdin or a restricted file, never as an argument | MUST |
+| [SH-LNT-001](rules/shell.md#sh-lnt-001--pass-shellcheck) | Pass `shellcheck` | SHOULD |
+| [CSS-STY-001](rules/html-css.md#css-sty-001--use-utility-classes-and-theme-tokens-instead-of-loose-colors-and-sizes) | Use utility classes and theme tokens instead of loose colors and sizes | SHOULD |
+| [CSS-ACC-001](rules/html-css.md#css-acc-001--use-button-and-a-for-interactive-elements) | Use `button` and `a` for interactive elements | MUST |
+| [CSS-ACC-002](rules/html-css.md#css-acc-002--give-icon-only-buttons-an-accessible-name-and-images-an-alt-text) | Give icon-only buttons an accessible name and images an `alt` text | MUST |
+| [CSS-ACC-003](rules/html-css.md#css-acc-003--replace-a-removed-outline-with-a-focus-visible-style) | Replace a removed outline with a `focus-visible` style | MUST |
 | [CI-PIP-001](rules/ci.md#ci-pip-001--run-the-pipeline-stages-in-order-each-gating-the-next) | Run the pipeline stages in order, each gating the next | MUST |
 | [CI-PIP-002](rules/ci.md#ci-pip-002--tests-gate-the-deploy) | Tests gate the deploy | MUST |
 | [CI-PIP-003](rules/ci.md#ci-pip-003--smoke-test-the-image-before-pushing-it) | Smoke-test the image before pushing it | MUST |
@@ -95,7 +122,8 @@ Format: `<SCOPE>-<TOPIC>-<NNN>`.
 - Scope: 2–3 letters. `GEN`, `PY`, `TS`, `TF`, `DKR`, `SH`, `CSS`, `CI`.
 - Topic: 3 letters. `CMT` comments, `CFG` configuration, `LOG` logging, `OBS` observability, `RUN` runtime, `CEL`
   Celery, `DEP` dependencies, `NAM` names, `STY` formatting, `TST` tests, `K8S` Kubernetes, `SEC` secrets, `PIP`
-  pipeline, `DPL` deploy, `LNT` lint, `TYP` types, `ARC` architecture, `INT` internationalization.
+  pipeline, `DPL` deploy, `LNT` lint, `TYP` types, `ARC` architecture, `INT` internationalization, `ACC` accessibility,
+  `IMG` image, `USR` container user, `IGN` ignore files, `SAF` script safety, `MOD` modules.
 - Number: 3 digits.
 
 Properties:

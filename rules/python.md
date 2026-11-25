@@ -17,6 +17,11 @@ Rules (full text in each topic file):
 
 | ID | Title | Level |
 |---|---|---|
+| [PY-STY-001](python/style-and-naming.md#py-sty-001--format-and-sort-imports-with-ruff-at-100-columns) | Format and sort imports with Ruff at 100 columns | MUST |
+| [PY-STY-002](python/style-and-naming.md#py-sty-002--enable-the-minimum-ruff-rule-set) | Enable the minimum Ruff rule set | SHOULD |
+| [PY-NAM-001](python/style-and-naming.md#py-nam-001--use-snake_case-pascalcase-and-upper_snake_case) | Use `snake_case`, `PascalCase` and `UPPER_SNAKE_CASE` | MUST |
+| [PY-CFG-001](python/config.md#py-cfg-001--read-the-environment-only-in-a-cached-basesettings-class) | Read the environment only in a cached `BaseSettings` class | MUST |
+| [PY-CFG-002](python/config.md#py-cfg-002--fail-at-startup-when-a-required-value-is-missing) | Fail at startup when a required value is missing | MUST |
 | [PY-LOG-001](python/logging-observability.md#py-log-001--use-the-standard-logging-configuration-and-never-log-credentials) | Use the standard logging configuration and never log credentials | MUST |
 | [PY-LOG-002](python/logging-observability.md#py-log-002--use-one-log-format-with-trace-and-span-ids) | Use one log format with trace and span IDs | MUST |
 | [PY-LOG-003](python/logging-observability.md#py-log-003--configure-logging-before-telemetry-and-silence-the-server-access-loggers) | Configure logging before telemetry and silence the server access loggers | MUST |
@@ -25,6 +30,8 @@ Rules (full text in each topic file):
 | [PY-OBS-002](python/logging-observability.md#py-obs-002--exclude-health-probes-and-the-metrics-route-from-the-access-log-and-traces) | Exclude health probes and the metrics route from the access log and traces | MUST |
 | [PY-OBS-003](python/logging-observability.md#py-obs-003--bind-the-authenticated-user-in-an-async-dependency) | Bind the authenticated user in an async dependency | MUST |
 | [PY-OBS-004](python/logging-observability.md#py-obs-004--propagate-w3c-trace-context-on-every-outbound-http-client) | Propagate W3C trace context on every outbound HTTP client | MUST |
+| [PY-OBS-005](python/logging-observability.md#py-obs-005--run-prometheus-metrics-in-multiprocess-mode-with-several-workers) | Run Prometheus metrics in multiprocess mode with several workers | MUST |
+| [PY-OBS-006](python/logging-observability.md#py-obs-006--label-metrics-by-route-template-not-by-url) | Label metrics by route template, not by URL | MUST |
 | [PY-RUN-001](python/runtime-gunicorn.md#py-run-001--run-apis-with-gunicorn-and-gunicorn_configpy-migrate-outside-the-web-process) | Run APIs with Gunicorn and `gunicorn_config.py`; migrate outside the web process | MUST |
 | [PY-RUN-002](python/runtime-gunicorn.md#py-run-002--recreate-connections-per-worker-and-close-them-on-exit) | Recreate connections per worker and close them on exit | MUST |
 | [PY-RUN-003](python/runtime-gunicorn.md#py-run-003--keep-graceful_timeout-below-the-pod-termination-grace-period) | Keep `graceful_timeout` below the pod termination grace period | MUST |
@@ -35,3 +42,4 @@ Rules (full text in each topic file):
 | [PY-DEP-002](python/dependencies.md#py-dep-002--build-images-from-the-lock-file) | Build images from the lock file | MUST |
 | [PY-TST-001](python/testing.md#py-tst-001--run-pytest-with-coverage-and-junit-reports-in-ci) | Run pytest with coverage and JUnit reports in CI | MUST |
 | [PY-TST-002](python/testing.md#py-tst-002--test-against-ephemeral-services-and-fixtures-never-shared-databases) | Test against ephemeral services and fixtures, never shared databases | MUST |
+| [PY-TST-003](python/testing.md#py-tst-003--do-not-lower-coverage-by-more-than-2-points-against-the-base-branch) | Do not lower coverage by more than 2 points against the base branch | SHOULD |
