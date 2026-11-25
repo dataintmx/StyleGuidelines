@@ -1,563 +1,173 @@
-# Guía de estilo <!-- omit in toc -->
+# DataInt Style Guide
+
+Single reference for how code is written, configured and checked in DataInt repositories. It is written to be read by
+people and by coding agents: every rule has a stable ID, a level and, whenever possible, an automated check.
+
+> Status: restructuring in progress. The skeleton below is in place; rule content is added in later phases. The
+> previous Spanish guide is kept in [`legacy/README.md`](legacy/README.md) until the new rules replace it.
+
+## Index
+
+| Area | ID prefix | File |
+|---|---|---|
+| General (comments, configuration, names, secrets, files, i18n) | `GEN-*` | [`rules/general.md`](rules/general.md) |
+| Python (index) | `PY-*` | [`rules/python.md`](rules/python.md) |
+| Python: formatting and naming | `PY-STY`, `PY-NAM` | [`rules/python/style-and-naming.md`](rules/python/style-and-naming.md) |
+| Python: configuration | `PY-CFG` | [`rules/python/config.md`](rules/python/config.md) |
+| Python: logging and observability | `PY-LOG`, `PY-OBS` | [`rules/python/logging-observability.md`](rules/python/logging-observability.md) |
+| Python: runtime (Gunicorn) | `PY-RUN` | [`rules/python/runtime-gunicorn.md`](rules/python/runtime-gunicorn.md) |
+| Python: Celery | `PY-CEL` | [`rules/python/celery.md`](rules/python/celery.md) |
+| Python: dependencies | `PY-DEP` | [`rules/python/dependencies.md`](rules/python/dependencies.md) |
+| Python: testing | `PY-TST` | [`rules/python/testing.md`](rules/python/testing.md) |
+| TypeScript (React, Next.js, Vite) | `TS-*` | [`rules/typescript.md`](rules/typescript.md) |
+| Terraform and Kubernetes | `TF-*` | [`rules/terraform.md`](rules/terraform.md) |
+| Docker | `DKR-*` | [`rules/docker.md`](rules/docker.md) |
+| Shell | `SH-*` | [`rules/shell.md`](rules/shell.md) |
+| HTML and CSS | `CSS-*` | [`rules/html-css.md`](rules/html-css.md) |
+| Continuous integration | `CI-*` | [`rules/ci.md`](rules/ci.md) |
+
+## Rule index
+
+| ID | Title | Level |
+|---|---|---|
+| [GEN-CMT-001](rules/general.md#gen-cmt-001--do-not-write-comments-in-code) | Do not write comments in code | MUST |
+| [GEN-CFG-001](rules/general.md#gen-cfg-001--keep-limits-timeouts-and-origins-in-a-dedicated-config-module) | Keep limits, timeouts and origins in a dedicated config module | MUST |
+| [GEN-SEC-001](rules/general.md#gen-sec-001--keep-secrets-out-of-the-repository-issues-pull-requests-logs-and-urls) | Keep secrets out of the repository, issues, pull requests, logs and URLs | MUST |
+| [PY-STY-001](rules/python/style-and-naming.md#py-sty-001--format-and-sort-imports-with-ruff-at-100-columns) | Format and sort imports with Ruff at 100 columns | MUST |
+| [PY-STY-002](rules/python/style-and-naming.md#py-sty-002--enable-the-minimum-ruff-rule-set) | Enable the minimum Ruff rule set | SHOULD |
+| [PY-NAM-001](rules/python/style-and-naming.md#py-nam-001--use-snake_case-pascalcase-and-upper_snake_case) | Use `snake_case`, `PascalCase` and `UPPER_SNAKE_CASE` | MUST |
+| [PY-CFG-001](rules/python/config.md#py-cfg-001--read-the-environment-only-in-a-cached-basesettings-class) | Read the environment only in a cached `BaseSettings` class | MUST |
+| [PY-CFG-002](rules/python/config.md#py-cfg-002--fail-at-startup-when-a-required-value-is-missing) | Fail at startup when a required value is missing | MUST |
+| [PY-LOG-001](rules/python/logging-observability.md#py-log-001--use-the-standard-logging-configuration-and-never-log-credentials) | Use the standard logging configuration and never log credentials | MUST |
+| [PY-LOG-002](rules/python/logging-observability.md#py-log-002--use-one-log-format-with-trace-and-span-ids) | Use one log format with trace and span IDs | MUST |
+| [PY-LOG-003](rules/python/logging-observability.md#py-log-003--configure-logging-before-telemetry-and-silence-the-server-access-loggers) | Configure logging before telemetry and silence the server access loggers | MUST |
+| [PY-LOG-004](rules/python/logging-observability.md#py-log-004--include-the-authenticated-user-and-organization-in-log-lines) | Include the authenticated user and organization in log lines | MUST |
+| [PY-OBS-001](rules/python/logging-observability.md#py-obs-001--do-not-put-basehttpmiddleware-between-the-access-log-and-the-app) | Do not put `BaseHTTPMiddleware` between the access log and the app | MUST |
+| [PY-OBS-002](rules/python/logging-observability.md#py-obs-002--exclude-health-probes-and-the-metrics-route-from-the-access-log-and-traces) | Exclude health probes and the metrics route from the access log and traces | MUST |
+| [PY-OBS-003](rules/python/logging-observability.md#py-obs-003--bind-the-authenticated-user-in-an-async-dependency) | Bind the authenticated user in an async dependency | MUST |
+| [PY-OBS-004](rules/python/logging-observability.md#py-obs-004--propagate-w3c-trace-context-on-every-outbound-http-client) | Propagate W3C trace context on every outbound HTTP client | MUST |
+| [PY-OBS-005](rules/python/logging-observability.md#py-obs-005--run-prometheus-metrics-in-multiprocess-mode-with-several-workers) | Run Prometheus metrics in multiprocess mode with several workers | MUST |
+| [PY-OBS-006](rules/python/logging-observability.md#py-obs-006--label-metrics-by-route-template-not-by-url) | Label metrics by route template, not by URL | MUST |
+| [PY-RUN-001](rules/python/runtime-gunicorn.md#py-run-001--run-apis-with-gunicorn-and-gunicorn_configpy-migrate-outside-the-web-process) | Run APIs with Gunicorn and `gunicorn_config.py`; migrate outside the web process | MUST |
+| [PY-RUN-002](rules/python/runtime-gunicorn.md#py-run-002--recreate-connections-per-worker-and-close-them-on-exit) | Recreate connections per worker and close them on exit | MUST |
+| [PY-RUN-003](rules/python/runtime-gunicorn.md#py-run-003--keep-graceful_timeout-below-the-pod-termination-grace-period) | Keep `graceful_timeout` below the pod termination grace period | MUST |
+| [PY-CEL-001](rules/python/celery.md#py-cel-001--do-nothing-heavy-in-worker_process_init) | Do nothing heavy in `worker_process_init` | MUST |
+| [PY-CEL-002](rules/python/celery.md#py-cel-002--configure-acknowledgement-limits-and-recycling-on-every-celery-app) | Configure acknowledgement, limits and recycling on every Celery app | MUST |
+| [PY-CEL-003](rules/python/celery.md#py-cel-003--write-a-heartbeat-file-from-a-consumer-bootstep) | Write a heartbeat file from a consumer bootstep | MUST |
+| [PY-DEP-001](rules/python/dependencies.md#py-dep-001--keep-sqlalchemy-below-21) | Keep SQLAlchemy below 2.1 | MUST |
+| [PY-DEP-002](rules/python/dependencies.md#py-dep-002--build-images-from-the-lock-file) | Build images from the lock file | MUST |
+| [PY-TST-001](rules/python/testing.md#py-tst-001--run-pytest-with-coverage-and-junit-reports-in-ci) | Run pytest with coverage and JUnit reports in CI | MUST |
+| [PY-TST-002](rules/python/testing.md#py-tst-002--test-against-ephemeral-services-and-fixtures-never-shared-databases) | Test against ephemeral services and fixtures, never shared databases | MUST |
+| [PY-TST-003](rules/python/testing.md#py-tst-003--do-not-lower-coverage-by-more-than-2-points-against-the-base-branch) | Do not lower coverage by more than 2 points against the base branch | SHOULD |
+| [TS-STY-001](rules/typescript.md#ts-sty-001--format-with-the-shared-prettier-configuration) | Format with the shared Prettier configuration | MUST |
+| [TS-STY-002](rules/typescript.md#ts-sty-002--import-through-the-alias-in-a-fixed-order) | Import through the `@/*` alias in a fixed order | MUST |
+| [TS-CFG-001](rules/typescript.md#ts-cfg-001--compile-in-strict-mode-and-type-check-with-no-emit) | Compile in strict mode and type-check with no emit | MUST |
+| [TS-LNT-001](rules/typescript.md#ts-lnt-001--lint-hooks-unused-variables-and-complexity-as-errors) | Lint hooks, unused variables and complexity as errors | MUST |
+| [TS-TYP-001](rules/typescript.md#ts-typ-001--do-not-use-any-use-unknown-and-narrow) | Do not use `any`; use `unknown` and narrow | MUST |
+| [TS-TYP-002](rules/typescript.md#ts-typ-002--declare-shared-types-in-types-and-keep-functions-out-of-them) | Declare shared types in `types/` and keep functions out of them | MUST |
+| [TS-ARC-001](rules/typescript.md#ts-arc-001--separate-presentation-from-logic) | Separate presentation from logic | MUST |
+| [TS-ARC-002](rules/typescript.md#ts-arc-002--keep-the-data-access-layer-thin-and-handle-errors-in-the-hook) | Keep the data-access layer thin and handle errors in the hook | SHOULD |
+| [TS-NAM-001](rules/typescript.md#ts-nam-001--follow-the-naming-and-export-conventions) | Follow the naming and export conventions | MUST |
+| [TS-INT-001](rules/typescript.md#ts-int-001--key-translations-by-namespace-and-update-every-locale) | Key translations by namespace and update every locale | MUST |
+| [TS-SEC-001](rules/typescript.md#ts-sec-001--supply-secrets-and-environment-values-through-environment-variables) | Supply secrets and environment values through environment variables | MUST |
+| [TS-SEC-002](rules/typescript.md#ts-sec-002--never-put-secrets-in-next_public_-variables) | Never put secrets in `NEXT_PUBLIC_*` variables | MUST |
+| [TS-TST-001](rules/typescript.md#ts-tst-001--pass-the-quality-gates-before-opening-a-pull-request) | Pass the quality gates before opening a pull request | MUST |
+| [TF-K8S-001](rules/terraform.md#tf-k8s-001--http-deployments-declare-startup-readiness-and-liveness-probes) | HTTP deployments declare startup, readiness and liveness probes | MUST |
+| [TF-K8S-002](rules/terraform.md#tf-k8s-002--probe-celery-workers-with-the-heartbeat-file) | Probe Celery workers with the heartbeat file | MUST |
+| [TF-K8S-003](rules/terraform.md#tf-k8s-003--roll-out-with-max_unavailable--0-and-max_surge--1) | Roll out with `max_unavailable = 0` and `max_surge = 1` | MUST |
+| [TF-K8S-004](rules/terraform.md#tf-k8s-004--add-a-short-prestop-wait-to-http-deployments) | Add a short `preStop` wait to HTTP deployments | MUST |
+| [TF-K8S-005](rules/terraform.md#tf-k8s-005--ignore-image-and-env-changes-when-the-cicd-pipeline-owns-them) | Ignore image and env changes when the CI/CD pipeline owns them | MUST |
+| [TF-SEC-001](rules/terraform.md#tf-sec-001--deliver-secrets-through-external-secrets) | Deliver secrets through External Secrets | MUST |
+| [TF-LNT-001](rules/terraform.md#tf-lnt-001--run-terraform-fmt-validate-tflint-and-checkov-in-ci) | Run `terraform fmt`, `validate`, `tflint` and `checkov` in CI | MUST |
+| [TF-MOD-001](rules/terraform.md#tf-mod-001--declare-a-moved-block-when-renaming-a-module-or-adding-count) | Declare a `moved` block when renaming a module or adding `count` | MUST |
+| [DKR-IMG-001](rules/docker.md#dkr-img-001--build-in-several-stages-and-keep-build-tools-out-of-the-final-image) | Build in several stages and keep build tools out of the final image | MUST |
+| [DKR-IMG-002](rules/docker.md#dkr-img-002--pin-the-exact-base-image-version) | Pin the exact base image version | MUST |
+| [DKR-USR-001](rules/docker.md#dkr-usr-001--run-as-an-unprivileged-user) | Run as an unprivileged user | SHOULD |
+| [DKR-IGN-001](rules/docker.md#dkr-ign-001--exclude-git-metadata-env-files-dependencies-and-artifacts-with-dockerignore) | Exclude Git metadata, env files, dependencies and artifacts with `.dockerignore` | MUST |
+| [DKR-SEC-001](rules/docker.md#dkr-sec-001--never-pass-secrets-through-arg-or-env) | Never pass secrets through `ARG` or `ENV` | MUST |
+| [SH-SAF-001](rules/shell.md#sh-saf-001--start-with-the-env-bash-shebang-and-set--euo-pipefail) | Start with the `env bash` shebang and `set -euo pipefail` | MUST |
+| [SH-SAF-002](rules/shell.md#sh-saf-002--quote-expansions-and-use-arrays-for-argument-lists) | Quote expansions and use arrays for argument lists | MUST |
+| [SH-SEC-001](rules/shell.md#sh-sec-001--pass-secrets-through-stdin-or-a-restricted-file-never-as-an-argument) | Pass secrets through stdin or a restricted file, never as an argument | MUST |
+| [SH-LNT-001](rules/shell.md#sh-lnt-001--pass-shellcheck) | Pass `shellcheck` | SHOULD |
+| [CSS-STY-001](rules/html-css.md#css-sty-001--use-utility-classes-and-theme-tokens-instead-of-loose-colors-and-sizes) | Use utility classes and theme tokens instead of loose colors and sizes | SHOULD |
+| [CSS-ACC-001](rules/html-css.md#css-acc-001--use-button-and-a-for-interactive-elements) | Use `button` and `a` for interactive elements | MUST |
+| [CSS-ACC-002](rules/html-css.md#css-acc-002--give-icon-only-buttons-an-accessible-name-and-images-an-alt-text) | Give icon-only buttons an accessible name and images an `alt` text | MUST |
+| [CSS-ACC-003](rules/html-css.md#css-acc-003--replace-a-removed-outline-with-a-focus-visible-style) | Replace a removed outline with a `focus-visible` style | MUST |
+| [CI-PIP-001](rules/ci.md#ci-pip-001--run-the-pipeline-stages-in-order-each-gating-the-next) | Run the pipeline stages in order, each gating the next | MUST |
+| [CI-PIP-002](rules/ci.md#ci-pip-002--tests-gate-the-deploy) | Tests gate the deploy | MUST |
+| [CI-PIP-003](rules/ci.md#ci-pip-003--smoke-test-the-image-before-pushing-it) | Smoke-test the image before pushing it | MUST |
+| [CI-PIP-004](rules/ci.md#ci-pip-004--deploy-the-image-tagged-with-the-commit-sha) | Deploy the image tagged with the commit SHA | MUST |
+| [CI-DPL-001](rules/ci.md#ci-dpl-001--verify-the-rollout-after-deploy-and-roll-back-on-failure) | Verify the rollout after deploy and roll back on failure | MUST |
+
+Supporting material:
 
-- [1. Introducción](#1-introducción)
-- [2. Guías auxiliares](#2-guías-auxiliares)
-  - [2.1. Listado de guías auxiliares](#21-listado-de-guías-auxiliares)
-- [3. Lineamientos generales](#3-lineamientos-generales)
-  - [3.1. Estructura de proyecto](#31-estructura-de-proyecto)
-  - [3.2. Flujo de trabajo con sistema de control de versiones](#32-flujo-de-trabajo-con-sistema-de-control-de-versiones)
-    - [3.2.1. Nomenclatura](#321-nomenclatura)
-    - [3.2.2. Convención de versionado](#322-convención-de-versionado)
-  - [3.3. Archivos de código fuente (_source files_)](#33-archivos-de-código-fuente-source-files)
-    - [3.3.1. Codificación](#331-codificación)
-    - [3.3.2. Nombre](#332-nombre)
-    - [3.3.3. Estructura](#333-estructura)
-    - [3.3.4. Final de archivo](#334-final-de-archivo)
-  - [3.4. Disposición del código](#34-disposición-del-código)
-    - [3.4.1. Longitud máxima de línea](#341-longitud-máxima-de-línea)
-    - [3.4.2. Tamaño y estructura de las clases](#342-tamaño-y-estructura-de-las-clases)
-    - [3.4.3. Líneas en blanco](#343-líneas-en-blanco)
-    - [3.4.4. Sangrado (_indentation_) y tabulación](#344-sangrado-indentation-y-tabulación)
-  - [3.5. Estilo de código](#35-estilo-de-código)
-    - [3.5.1. Caracteres fuera de la especificación ASCII](#351-caracteres-fuera-de-la-especificación-ascii)
-    - [3.5.2. Caracteres especiales](#352-caracteres-especiales)
-    - [3.5.3. Comentarios y documentación en código](#353-comentarios-y-documentación-en-código)
-      - [3.5.3.1. Comentarios](#3531-comentarios)
-      - [3.5.3.2. Documentación en código (_docstring_)](#3532-documentación-en-código-docstring)
-    - [3.5.4. Nomenclatura](#354-nomenclatura)
-      - [3.5.4.1. Nomenclatura por tipo de identificador](#3541-nomenclatura-por-tipo-de-identificador)
-        - [3.5.4.1.1. Paquetes y módulos](#35411-paquetes-y-módulos)
-        - [3.5.4.1.2. Clases](#35412-clases)
-        - [3.5.4.1.3. Métodos y funciones](#35413-métodos-y-funciones)
-        - [3.5.4.1.4. Variables y constantes globales](#35414-variables-y-constantes-globales)
-        - [3.5.4.1.5. Objetos privados](#35415-objetos-privados)
-        - [3.5.4.1.6. Parámetros](#35416-parámetros)
-        - [3.5.4.1.7. Variables y constantes locales](#35417-variables-y-constantes-locales)
-    - [3.5.5. Uso de espacios en expresiones y declaraciones](#355-uso-de-espacios-en-expresiones-y-declaraciones)
-- [4. Archivos de configuración](#4-archivos-de-configuración)
-  - [4.1. Python](#41-python)
-    - [4.1.1. Pylint](#411-pylint)
+- [`rules/TEMPLATE.md`](rules/TEMPLATE.md): template every rule follows.
+- [`config/`](config/README.md): one configuration file per tool, kept identical to what CI runs.
+- [`scripts/`](scripts/README.md): checks that enforce rules no linter covers.
+- [`docs/migration.md`](docs/migration.md): how the old monolithic README maps to this structure.
+- [`CHANGELOG.md`](CHANGELOG.md): additions, changes and withdrawals of rules.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md): how to propose a rule.
+- [`AGENTS.md`](AGENTS.md): snippet for `CLAUDE.md`, `AGENTS.md` and `copilot-instructions.md`.
+- [`legacy/`](legacy/README.md): previous guide and Pylint configuration, scheduled for removal.
 
-# 1. Introducción
+## How to read a rule
 
-En esta guía se definen los lineamientos y convenciones que deberán seguirse al momento de escribir código en proyectos
-de DataInt. El principal objetivo de la guía es delinear un estándar de consistencia y coherencia en el código. Un
-proyecto con estilo consistente y coherente es más fácil de leer, entender y, por lo tanto, mantener.
+Every rule is a level-3 heading `### <ID> — Imperative title`, followed by its level, scope, enforcement, rationale and
+examples. The exact layout is in [`rules/TEMPLATE.md`](rules/TEMPLATE.md).
 
-Es importante recordar que esta guía solo es eso: una guía, es decir, un punto arbitrario de referencia sobre cómo debe
-verse el código. Es imposible cubrir todos los casos y situaciones en un solo documento. Por esto, el programador
-siempre tiene la última palabra; con su experiencia y conocimientos, juzgará cómo aplicar la guía y en qué situaciones
-pueden hacerse excepciones a los lineamientos que en ella se presentan.
+### Rule IDs
 
-Esta guía esta divida en cuatro partes. En primer lugar, se define un grupo de guías auxiliares para lenguajes de
-programación en específico. Estas deberán usarse para complementar los lineamientos de esta guía y solo deberán usarse
-en aquellos casos que no se encuentran contemplados en este documento. En segundo lugar, se presentan los lineamientos
-generales de la organización. Aquí se definen algunas reglas básicas para trabajar en los proyectos de DataInt. Estas
-reglas deberán seguirse, en la medida de lo posible, en todos los lenguajes de programación. En la tercera parte, se
-definen reglas específicas para cada lenguaje de programación. Si una regla específica para un lenguaje de programación
-entra en conflicto con un lineamiento general, la regla específica tendrá preferencia sobre el lineamiento general.
-Finalmente, en la cuarta parte se presentan archivos de configuración que pueden usarse con IDEs y otras herramientas
-de análisis de código estático ([_linters_](https://en.wikipedia.org/wiki/Lint_(software))) para detectar inconsistencias y violaciones a las recomendaciones de esta guía.
+Format: `<SCOPE>-<TOPIC>-<NNN>`.
 
-# 2. Guías auxiliares
+- Scope: 2–3 letters. `GEN`, `PY`, `TS`, `TF`, `DKR`, `SH`, `CSS`, `CI`.
+- Topic: 3 letters. `CMT` comments, `CFG` configuration, `LOG` logging, `OBS` observability, `RUN` runtime, `CEL`
+  Celery, `DEP` dependencies, `NAM` names, `STY` formatting, `TST` tests, `K8S` Kubernetes, `SEC` secrets, `PIP`
+  pipeline, `DPL` deploy, `LNT` lint, `TYP` types, `ARC` architecture, `INT` internationalization, `ACC` accessibility,
+  `IMG` image, `USR` container user, `IGN` ignore files, `SAF` script safety, `MOD` modules.
+- Number: 3 digits.
 
-A continuación se definen las guías auxiliares a la guía de estilo de DataInt. Las guías auxiliares son guías de estilo
-usadas por otras organizaciones (principalmente Google) y cuya función es complementar los lineamientos que se definen
-en este documento. Las guías auxiliares son específicas a cada lenguaje de programación.
+Properties:
 
-Las guías auxiliares deberán usarse en aquellos casos que no son cubiertos por la guía de estilo de DataInt. Si una
-regla en una guía auxiliar entra en conflicto con una regla específica de lenguaje o un lineamiento general definidos en
-este documento, las reglas o lineamientos definidos aquí tendrán preferencia sobre aquellas definidas en una guía
-auxiliar. En resumen, la jerarquía de reglas es la siguiente:
+- An ID is immutable and is never reused. A retired rule stays in place with `Status: withdrawn` and the reason.
+- The anchor is the lowercase ID, for example `#py-log-001`. The heading is exactly `### PY-LOG-001 — title`.
+- Each language file and this README list ID, title and level.
+- Commits and pull requests cite the ID, for example `sec(auth): remove query token from log (PY-LOG-003)`. Agents cite
+  the ID when they justify a change.
+- Workflow rules (branches, commits, pull requests, versioning) are not redefined here. `GEN-GIT-*` rules are pointers
+  to the organization-wide `CONTRIBUTING.md`, so they can be cited without duplicating text.
 
-1. Reglas específicas para lenguajes de programación (guía de estilo de DataInt).
-2. Lineamientos generales (guía de estilo de DataInt).
-3. Guía auxiliar de estilo.
+### MUST and SHOULD
 
-Si en la guía de estilo de DataInt no hay reglas específicas para un lenguaje de programación, el programador deberá
-usar la guía de estilo definida por Google para dicho lenguaje de programación. Las guías de estilo de Google pueden
-encontrarse en [su respectivo repositorio](https://github.com/google/styleguide).
+- **MUST**: CI verifies it or the reviewer blocks the change.
+- **SHOULD**: the exception is justified in the pull request.
 
-## 2.1. Listado de guías auxiliares
+The phrase "as far as possible" is not used. A rule is either MUST or SHOULD.
 
-- **JavaScript**: [Guía de estilo para JavaScript de Google](https://google.github.io/styleguide/jsguide.html).
-- **TypeScript**: [Guía de estilo para TypeScript de Google](https://google.github.io/styleguide/tsguide.html).
-- **Python**: [Guía de estilo para Python definida en la PEP-0008](https://www.python.org/dev/peps/pep-0008/).
-- **HTML y CSS**: [Guía de estilo para HTML/CSS de Google](https://google.github.io/styleguide/htmlcssguide.html).
-- **PHP**: [Guía de estilo para PHP de WordPress](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/).
+## Precedence
 
-# 3. Lineamientos generales
+1. Language-specific rules in this guide.
+2. General rules (`GEN-*`) in this guide.
+3. Auxiliary guides: PEP 8 for Python, Google style guides for JavaScript, TypeScript and HTML/CSS.
 
-En esta sección se definen los lineamientos generales para escribir código en los proyectos de DataInt. Los lineamientos
-generales deberán seguirse, en la medida de lo posible, en todo los lenguajes de programación. Ante cualquier situación
-no cubierta en estos lineamientos generales, el programador deberá remitirse a los lineamientos específicos para su
-lenguaje de programación y, en su defecto, a una de las guías auxiliares.
+Auxiliary guides apply only where this guide is silent.
 
-## 3.1. Estructura de proyecto
+## Proposing changes
 
-Al iniciarse un proyecto nuevo, el programador deberá crear un directorio en blanco donde se colocarán todos los
-archivos del proyecto. De igual forma, el programador deberá generar un repositorio de git en el directorio. Todos los
-proyectos de DataInt deberán usar git como _software_ de control de cambios, incluso cuando el proyecto no sea alojado
-en un servidor git (como GitHub).
+Open a pull request following [`CONTRIBUTING.md`](CONTRIBUTING.md). Reviewers comment by rule ID. A rule without
+agreement becomes SHOULD or is left out; it does not block the merge of the rest.
 
-La implementación de parches, nuevas características, _hotfixes_, o cualquier modificación sobre un trabajo ya existente
-no requiere la creación de un nuevo espacio de trabajo (directorio + control de cambios), a menos que así sea
-expresamente indicado por el responsable del proyecto.
+## Decisions
 
-En el nivel principal (_root_, `/`) del repositorio, siempre deberán estar presentes estos archivos:
+Decisions taken on 2026-11-23 (P1–P5):
 
-1. README: Un, léeme con una descripción breve de los contenidos del repositorio.
-2. LICENSE: Un archivo con la nota de copyright, si el código del proyecto es propietario, o una licencia de código
-   abierto, si el proyecto es _open source_.
+| ID | Decision |
+|---|---|
+| P1 | Docstrings are allowed only on the public API of reusable libraries. |
+| P2 | Branch names carry no issue number. The link to the issue goes in the pull request with `Closes #N`. This is defined by the organization-wide `CONTRIBUTING.md` (T23) and is not duplicated here. |
+| P3 | Python line length is 100 columns. |
+| P4 | PHP and WordPress are removed from the auxiliary guides. |
+| P5 | The comment check starts as informational for one week, then becomes blocking. |
 
-El programador deberá evitar, en la medida de lo posible, incluir archivos de código fuente (_source files_) en el nivel
-principal (_root_, `/`) del proyecto.
+## Site
 
-## 3.2. Flujo de trabajo con sistema de control de versiones
-
-El programador deberá tener en cuenta las siguientes reglas al momento de trabajar con git en los proyectos de DataInt:
-
-1. La rama principal del proyecto y la que contendrá la última versión estable del código se llamará `master`.
-2. El programador deberá evitar trabajar directamente cambios sobre la rama `master`.
-3. Todo proyecto de DataInt deberá tener una rama de desarrollo que se llamará `dev`.
-4. La rama `dev` será una bifurcación de `master`.
-5. Cada vez que el programador empiece la implementación de una nueva característica o tarea, deberá crear una
-   bifurcación de `dev` hacia una nueva rama `feat/*`. Una vez terminada la implementación de la nueva característica,
-   deberá hacer un _merge_ con la rama de desarrollo `dev` o, en su defecto, solicitar un _pull request_ o un _merge
-   request_ al responsable de proyecto (según las reglas previamente definidas del proyecto).
-6. Cada vez que el programador empiece a trabajar en parches o soluciones a problemas que se presentaron en
-   características ya implementadas del código, deberá crear una bifurcación de `dev` hacia una nueva rama `fix/*`. Una
-   vez terminada la implementación de la solución, deberá hacer un _merge_ con la rama de desarrollo `dev` o, en su
-   defecto, solicitar un _pull request_ o un _merge request_ al responsable de proyecto (según las reglas previamente
-   definidas del proyecto).
-7. Cuando el responsable de proyecto así lo indique, deberá crearse una rama de entrega o _release_ `release/*`. La
-   rama `release/*` deberá ser una bifurcación del estado que guarda la rama `dev`.
-8. Una vez creada la rama `release/*`, los integrantes del proyecto no podrán crear nuevas ramas de
-   características (`feat/*`) y solo podrán limitar su trabajo en el proyecto a tareas de documentación y arreglo de _
-   bugs_ presentes en la rama `release/*`.
-9. Para el arreglo de _bugs_ y otros problemas en el código detectados en la rama `release/*`, el programador deberá
-   crear una rama `bugfix/*` a partir de `release/*`. Una vez terminada la implementación del parche, el programador
-   deberá hacer un _merge_ con la rama de entrega `release/*` o, en su defecto, solicitar un _pull request_ o un _merge
-   request_ al responsable de proyecto (según las reglas previamente definidas del proyecto).
-10. En algunos proyectos será necesario liberar versiones de acceso temprano para realizar pruebas directamente con
-    clientes o con otras áreas de DataInt. En estos casos, el equipo de desarrollo podrá montar la aplicación o servicio
-    directamente desde la última rama `release/*`. Los parches para problemas detectados en esta prueba de etapas sobre
-    acceso temprano se realizarán conforme a lo estipulado en el punto 9 de estos lineamientos.
-11. Cuando el responsable de proyecto así lo indique, y el _software_ esté listo para entrega, se hará un _merge_ entre
-    la rama `release/*` y el `master` del repositorio.
-12. Si el equipo de desarrollo detecta un problema en la última versión del código disponible en la rama `master`, podrá
-    realizarse un parche directamente sobre esta rama. Este tipo de parches deberán realizarse en una rama `hotfix/*`
-    que se bifurcará directamente de `master` y deberá ser fusionada directamente con esta (previa autorización del
-    responsable del proyecto o vía _pull request_). Los parches `hotfix/*` solo deberán ser aplicados en los siguientes
-    casos: i) cuando el equipo de desarrollo no programe otro _release_ del producto en un periodo menor a 30 días y ii)
-    cuando la implementación del `hotfix/*` propuesto sea razonablemente menor y no tenga un impacto directo en el
-    usuario final.
-13. Los equipos de desarrollo deberán dar seguimiento a errores y problemas en el código usando los sistemas de _issues_
-    proporcionados por las plataformas de alojamiento de repositorios, como GitHub o GitLab.
-
-### 3.2.1. Nomenclatura
-
-Los nombres de las ramas en las que trabaja el programador deberán ser claros y descriptivos del trabajo realizado,
-evitando, en la medida de lo posible, abreviaciones o siglas. 
-**Solo se permitirá el uso de siglas reconocidas de forma internacional**.
-
-**Deberá usarse el idioma inglés para nombrar las ramas de trabajo** y solo puede usarse el guion medio `-` como
-separador de palabras. Las diagonales `/` se reservarán para etiquetas o categorías como prefijo del nombre de la rama.
-
-Los prefijos permitidos, como se estableció en la sección anterior, son: `feat/`, `fix/`, `release/`, `bugfix/`
-y `hotfix/`.
-
-En el caso de parches o soluciones (`fix/`, `bugfix/` y `hotfix/`), el nombre de la rama debe empezar con el
-identificador de problema asignado por el sistema de _issues_ proporcionados por las plataformas de alojamiento de
-repositorios, como GitHub o GitLab.
-
-**Correcto** :white_check_mark:
-
-```bash
-git checkout -b feat/function-to-compute-differences
-git checkout -b fix/12-map-not-changing
-```
-
-**Incorrecto** :x:
-
-```bash
-git checkout -b wip-nuevos-colores-en-mapa
-git checkout -b feat/NewColorSchemeForMaps
-```
-
-### 3.2.2. Convención de versionado
-
-En el caso de las ramas `release/*`, estas siempre recibirán como nombre la versión del producto. Los proyectos de
-DataInt usarán [CalVer](https://calver.org/) como la convención de versionado. Esta convención está basada en fechas de
-liberación y no en un identificador incremental (como Ubuntu, ECMAScript o Pip).
-
-La versión de proyectos de DataInt seguirá el siguiente patrón: `YY.0M.MINOR-PRE`, donde `YY` es el año a dos
-dígitos, `0M` es el mes en número y con prefijo cero (`08`, `09`, `10`, etc.), `MINOR` es un indicativo de la "versión
-menor" del producto, es decir, parches y reparaciones que no rompen la compatibilidad del producto, y `PRE` es un
-identificador de acceso temprano (_pre-release_) que puede ser `alpha`, `beta` o `rc`.
-
-`PRE` es el único componente opcional y solo será usado cuando las características del proyecto así lo requieran.
-
-**Correcto** :white_check_mark:
-
-```bash
-git checkout -b release/v21.12.0
-git checkout -b release/v22.01.0-alpha
-git checkout -b release/v22.01.0-rc
-```
-
-**Incorrecto** :x:
-
-```bash
-git checkout -b release/v22.7.1
-git checkout -b release/v0.0.1
-git checkout -b release/latest
-```
-
-## 3.3. Archivos de código fuente (_source files_)
-
-### 3.3.1. Codificación
-
-Todos los archivos deberán ser codificados en **UTF-8**.
-
-### 3.3.2. Nombre
-
-Los nombres de los archivos siempre deberán ser en minúsculas (_lowercase_) y podrán contener guiones medios ( `-` ) y
-bajos ( `_` ).
-
-Los nombres de archivo no podrán contener signos de puntuación adicionales a los requeridos para especificar la
-extensión del archivo (`.py`, `.js`, etc.).
-
-Los nombres de archivos no podrán contener espacios en blanco.
-
-### 3.3.3. Estructura
-
-Los archivos con código deberán tener, en la medida de lo posible, la siguiente estructura:
-
-1. Shebang, si es requerido (solo en los puntos de entrada).
-2. Importación de dependencias de la librería estándar.
-3. Importación de dependencias escritas por terceros.
-4. Importación de dependencias escritas por DataInt.
-5. Implementación.
-
-### 3.3.4. Final de archivo
-
-Todos los archivos deberán terminar con un salto de línea (`\n`) o, en su defecto, un retorno de carro con nueva
-línea (`\rn`).
-
-## 3.4. Disposición del código
-
-### 3.4.1. Longitud máxima de línea
-
-Las líneas de código deberán limitarse a **120 caracteres**.
-
-Las líneas de comentarios y documentación en código (_docstring_) deberán limitarse a **80 caracteres** para facilitar
-su legibilidad.
-
-### 3.4.2. Tamaño y estructura de las clases
-
-Las clases deben limitarse, en la medida de lo posible, a 500 líneas de código, 5 atributos y 20 métodos de hasta 25 
-líneas de código.
-
-### 3.4.3. Líneas en blanco
-
-Deberán colocarse dos líneas en blanco por encima de definiciones de clases.
-
-Deberán colocarse una línea en blanco alrededor de definiciones de métodos o funciones.
-
-El programador deberá separar con líneas en blanco grupos de declaraciones, métodos o funciones.
-
-**Correcto** :white_check_mark:
-
-```js
-const name = "Fulano";
-const last_name = "Pérez";
-const phone = "1010101010";
-
-const phone = ["Negrito", "Panchito"];
-
-
-// Before a class declaration, two blank lines
-class Persona {
-    constructor(name, last_name, phone, pets) {
-        this.name = name;
-        this.last_name = last_name;
-        this.phone = phone;
-        this.pets = pets
-    }
-
-    // Before and after functions and methods, one blank line
-    get name_to_upper() {
-        return this.name.toUpperCase();
-    }
-
-}
-```
-
-**Incorrecto** :x:
-
-```js
-const name = "Fulano";
-const last_name = "Pérez";
-const phone = "1010101010";
-const phone = ["Negrito", "Panchito"];
-class Persona {
-    constructor(name, last_name, phone, pets) {
-        this.name = name;
-        this.last_name = last_name;
-        this.phone = phone;
-        this.pets = pets
-    }
-    get name_to_upper() {
-        return this.name.toUpperCase();
-    }
-}
-```
-
-### 3.4.4. Sangrado (_indentation_) y tabulación
-
-Cada vez que se abre un nuevo bloque de código, se incrementa el **sangrado en 4 espacios en blanco** (`\s`). El
-sangrado del código deberá hacerse con espacios en blanco y deberá evitarse el uso de tabuladores (`\t`).
-
-## 3.5. Estilo de código
-
-### 3.5.1. Caracteres fuera de la especificación ASCII
-
-Si el programador requiere usar caracteres fuera de la especificación ascii (como caracteres pertenecientes a alfabetos
-distintos al latino), el programador deberá escribirlo explícitamente y deberá evitar el uso de secuencias hexadecimales
-o códigos unicode con escape de texto.
-
-**Correcto** :white_check_mark:
-
-```js
-// Explicit use of the greek letter 'mu'
-const units = "μm";
-```
-
-**Incorrecto** :x:
-
-```js
-// Don't use escaped hexadecimal or unicode
-const units = "\u03bcm";
-```
-
-### 3.5.2. Caracteres especiales
-
-Si el programador requiere usar caracteres especiales (como saltos de línea, tabulaciones, espacios en blanco, etc.), el
-programador deberá hacer uso de la secuencia de escape tradicional (`\"`, `\s`, `\t`, `\v`, etc.) en lugar de secuencias
-hexadecimales o códigos unicode con escape de texto.
-
-**Correcto** :white_check_mark:
-
-```js
-// Always use the 'traditional' escaped character
-const title = "Incidencia Delictiva\nMarzo de 2020";
-```
-
-**Incorrecto** :x:
-
-```js
-// Don't use the ascii escaped codes
-const title = "Incidencia Delictiva\x0aMarzo de 2020";
-```
-
-### 3.5.3. Comentarios y documentación en código
-
-#### 3.5.3.1. Comentarios
-
-Solamente se debe comentar las instrucciones que, debido a su complejidad, son difíciles de comprender 
-(por ejemplo: expresiones regulares). En estos casos, debe priorizarse la actualización de estos comentarios 
-después de aplicar un cambio. Por lo tanto, **los nombres de las clases, propiedades y métodos deben ser
-lo suficientemente claros y descriptivos para que no sea necesario comentar el código**.
-
-**Los comentarios en el código siempre deberán escribirse en inglés**.
-
-En idiomas de programación que permiten bloques de comentarios, se recomienda reservar la notación de bloque para
-comentarios que abarquen más de una línea. Si el comentario solo abarca una línea, se recomienda usar exclusivamente la
-marca de línea comentada por default.
-
-**Correcto** :white_check_mark:
-
-```js
-// This is a single line comment
-
-/*
-This is a multiline comment. Lorem ipsum dolor sit amet, 
-consectetur adipiscing elit. Phasellus ante leo, auctor id dolor vel, rhoncus viverra massa. 
-Cras in feugiat arcu. In vehicula est ligula, eu efficitur libero aliquam vel. 
-*/
-
-
-// This is a multiline comment. Lorem ipsum dolor sit amet, 
-// consectetur adipiscing elit. Phasellus ante leo, auctor id dolor vel, rhoncus viverra massa. 
-// Cras in feugiat arcu. In vehicula est ligula, eu efficitur libero aliquam vel. 
-```
-
-**Incorrecto** :x:
-
-```js
-// Este es un comentario en español
-
-/* Don't use block comment notation for single line comments! */
-```
-
-#### 3.5.3.2. Documentación en código (_docstring_)
-
-Únicamente en proyectos donde se implementen librerías nuevas y resulte necesario aprovechar las
-herramientas de documentación automática a través de _docstring_, los desarrolladores harán uso de _docstring_. 
-Esta documentación deben ser suficientemente claras para que otros colaboradores del proyecto (dentro y fuera de
-DataInt), puedan entender el código que están leyendo.
-
-El uso de _docstrings_ no menoscabará, ni remplazará, el uso de comentarios para
-describir el código cuando sea necesario.
-
-Toda documentación en código deberá contener, por lo menos, los siguientes elementos:
-
-1. Descripción breve de la función, método o clase.
-2. Nombre de los parámetros requeridos, su tipo y una breve descripción.
-3. Tipo del objeto devuelto (_return_) y descripción.
-
-### 3.5.4. Nomenclatura
-
-Los nombres de objetos, funciones, métodos y clases **sólo podrán escribirse usando caracteres ASCII** (esto incluye el
-uso de acentos y la letra "ñ"). **Los nombres deben ser en inglés**. En el caso excepcional de que sean en castellano,
-se recomienda seguir las reglas de ortografía (es decir, acentuar correctamente y evitar la sustitución de `ñ`
-por `ni`: `año -> anio`).
-
-El programador, en la medida de lo posible, siempre debe priorizar el uso de **nombres completos y descriptivos de los
-objetos**, propiedades, métodos y clases. Es decir, el programador debe evitar usar letras individuales,
-abreviaciones o nombres ambiguos, siglas, y acrónimos ambiguos, así como la remoción de vocales. De igual forma, debe
-evitarse también el empleo de la [notación húngara](https://en.wikipedia.org/wiki/Hungarian_notation).
-
-El programador podrá hacer excepciones a lo anterior en los siguientes casos:
-
-1. En el caso de funciones estadísticas donde hay un uso razonablemente común de letras (latinas y griegas) para
-   designar algunos objetos. Por ejemplo, las medias tienden a denotarse `m` o `mu`, la desviación estándar `s`, el
-   tamaño de muestra `n`, la probabilidad `p` o `pi`, etc.
-2. En el caso de iteradores, se permitirá el uso de las letras `c`, `i`, `j`, `k`, `r`, `x`, `y`, `z`, siempre y cuando
-   sea en un bloque de código reducido y no haya otros bloques de iteración anidados.
-3. En el caso de las siglas, las reconocidas internacionalmente, por ejemplo: `url`, `dni`, `pin`.
-
-#### 3.5.4.1. Nomenclatura por tipo de identificador
-
-##### 3.5.4.1.1. Paquetes y módulos
-
-Los nombres de paquetes y módulos de código siempre deben ser `UpperCamelCase`. Por
-ejemplo: `DataIntAuth.Core.DataIntUser`.
-
-##### 3.5.4.1.2. Clases
-
-Los nombres de clases siempre deben ser `UpperCamelCase`. Por ejemplo: `DataIntUser`.
-
-##### 3.5.4.1.3. Métodos y funciones
-
-Los nombres de métodos y funciones siempre deben ser `lower_snake_case`, por ejemplo `DataIntUser.create_token()`.
-
-##### 3.5.4.1.4. Variables y constantes globales
-
-Los nombres de variables y constantes globales —incluidas las de ambiente (_environment_)— deben ser `UPPER_SNAKE_CASE`.
-
-##### 3.5.4.1.5. Objetos privados
-
-En idiomas de programación que no dispongan de una definición formal de objeto (propiedades, métodos, funciones, etc.)
-privado, éstas se denotarán con un guion bajo como prefijo ( `_` ). Por ejemplo: `_propiedad_privada`.
-
-##### 3.5.4.1.6. Parámetros
-
-Los parámetros de funciones y constructores de clase se escribirán en `lower_snake_case`.
-
-##### 3.5.4.1.7. Variables y constantes locales
-
-Los nombres de variables y constantes locales se escribirán en `lower_snake_case`.
-
-### 3.5.5. Uso de espacios en expresiones y declaraciones
-
-Al menos que el lenguaje de programación asi lo requiera, deberá evitarse añadir espacios en blanco inmediatamente al
-interior de paréntesis o llaves.
-
-**Correcto** :white_check_mark:
-
-```js
-const my_formula = x_1 + x_2 * b_2 + x_3 * (b_3 + c);
-```
-
-**Incorrecto** :x:
-
-```js
-const my_formula = x_1 + x_2 * b_2 + x_3 * ( b_3 + c );
-```
-
-Al menos que el lenguaje de programación así lo requiera, deberá evitarse añadir espacios en blanco después de una coma
-y antes de un paréntesis o llave de cierre.
-
-**Correcto** :white_check_mark:
-
-```js
-var array = [1, 3, 3,];
-```
-
-**Incorrecto** :x:
-
-```js
-var array = [1, 3, 3, ];
-```
-
-Al menos que el lenguaje de programación así lo requiera, deberá evitarse añadir espacios en blanco inmediatamente antes
-de comas.
-
-**Correcto** :white_check_mark:
-
-```js
-var array = [1, 3, 3];
-```
-
-**Incorrecto** :x:
-
-```js
-var array = [1 , 3 , 3];
-```
-
-Deberá evitarse añadir espacios en blanco para alinear expresiones en el archivo.
-
-**Correcto** :white_check_mark:
-
-```js
-const a = 1;
-const b = 2;
-const long_const_name = 99;
-```
-
-**Incorrecto** :x:
-
-```js
-const a               = 1;
-const b               = 2;
-const long_const_name = 99;
-```
-
-Siempre deberá añadirse un espacio en blanco alrededor de operadores binarios (`<`, `>`, `!=`, etc.) y expresiones de
-asignación (`=`, `<-`, `->`, `+=`, etc.).
-
-**Correcto** :white_check_mark:
-
-```js
-const a = 1;
-const b = 2;
-const a_bigger_than_b = a > b;
-```
-
-**Incorrecto** :x:
-
-```js
-const a=1;
-const b=2;
-const a_bigger_than_b=a>b;
-```
-
-# 4. Archivos de configuración
-
-## 4.1. Python
-
-### 4.1.1. Pylint
-
-El archivo de configuración para pylint puede descargarse [aquí](./Config/.pylintrc).
+This repository is published with Jekyll (`jekyll-theme-cayman`); this README is the site index.
