@@ -3,7 +3,7 @@
 Single reference for how code is written, configured and checked in DataInt repositories. It is written to be read by
 people and by coding agents: every rule has a stable ID, a level and, whenever possible, an automated check.
 
-> Status: restructuring in progress (T24). The skeleton below is in place; rule content is added in later phases. The
+> Status: restructuring in progress. The skeleton below is in place; rule content is added in later phases. The
 > previous Spanish guide is kept in [`legacy/README.md`](legacy/README.md) until the new rules replace it.
 
 ## Index
@@ -25,6 +25,39 @@ people and by coding agents: every rule has a stable ID, a level and, whenever p
 | Shell | `SH-*` | [`rules/shell.md`](rules/shell.md) |
 | HTML and CSS | `CSS-*` | [`rules/html-css.md`](rules/html-css.md) |
 | Continuous integration | `CI-*` | [`rules/ci.md`](rules/ci.md) |
+
+## Rule index
+
+| ID | Title | Level |
+|---|---|---|
+| [GEN-CMT-001](rules/general.md#gen-cmt-001--do-not-write-comments-in-code) | Do not write comments in code | MUST |
+| [GEN-CFG-001](rules/general.md#gen-cfg-001--keep-limits-timeouts-and-origins-in-a-dedicated-config-module) | Keep limits, timeouts and origins in a dedicated config module | MUST |
+| [PY-LOG-001](rules/python/logging-observability.md#py-log-001--use-the-standard-logging-configuration-and-never-log-credentials) | Use the standard logging configuration and never log credentials | MUST |
+| [PY-LOG-002](rules/python/logging-observability.md#py-log-002--use-one-log-format-with-trace-and-span-ids) | Use one log format with trace and span IDs | MUST |
+| [PY-LOG-003](rules/python/logging-observability.md#py-log-003--configure-logging-before-telemetry-and-silence-the-server-access-loggers) | Configure logging before telemetry and silence the server access loggers | MUST |
+| [PY-LOG-004](rules/python/logging-observability.md#py-log-004--include-the-authenticated-user-and-organization-in-log-lines) | Include the authenticated user and organization in log lines | MUST |
+| [PY-OBS-001](rules/python/logging-observability.md#py-obs-001--do-not-put-basehttpmiddleware-between-the-access-log-and-the-app) | Do not put `BaseHTTPMiddleware` between the access log and the app | MUST |
+| [PY-OBS-002](rules/python/logging-observability.md#py-obs-002--exclude-health-probes-and-the-metrics-route-from-the-access-log-and-traces) | Exclude health probes and the metrics route from the access log and traces | MUST |
+| [PY-OBS-003](rules/python/logging-observability.md#py-obs-003--bind-the-authenticated-user-in-an-async-dependency) | Bind the authenticated user in an async dependency | MUST |
+| [PY-OBS-004](rules/python/logging-observability.md#py-obs-004--propagate-w3c-trace-context-on-every-outbound-http-client) | Propagate W3C trace context on every outbound HTTP client | MUST |
+| [PY-RUN-001](rules/python/runtime-gunicorn.md#py-run-001--run-apis-with-gunicorn-and-gunicorn_configpy-migrate-outside-the-web-process) | Run APIs with Gunicorn and `gunicorn_config.py`; migrate outside the web process | MUST |
+| [PY-RUN-002](rules/python/runtime-gunicorn.md#py-run-002--recreate-connections-per-worker-and-close-them-on-exit) | Recreate connections per worker and close them on exit | MUST |
+| [PY-RUN-003](rules/python/runtime-gunicorn.md#py-run-003--keep-graceful_timeout-below-the-pod-termination-grace-period) | Keep `graceful_timeout` below the pod termination grace period | MUST |
+| [PY-CEL-001](rules/python/celery.md#py-cel-001--do-nothing-heavy-in-worker_process_init) | Do nothing heavy in `worker_process_init` | MUST |
+| [PY-CEL-002](rules/python/celery.md#py-cel-002--configure-acknowledgement-limits-and-recycling-on-every-celery-app) | Configure acknowledgement, limits and recycling on every Celery app | MUST |
+| [PY-CEL-003](rules/python/celery.md#py-cel-003--write-a-heartbeat-file-from-a-consumer-bootstep) | Write a heartbeat file from a consumer bootstep | MUST |
+| [PY-DEP-001](rules/python/dependencies.md#py-dep-001--keep-sqlalchemy-below-21) | Keep SQLAlchemy below 2.1 | MUST |
+| [PY-DEP-002](rules/python/dependencies.md#py-dep-002--build-images-from-the-lock-file) | Build images from the lock file | MUST |
+| [PY-TST-001](rules/python/testing.md#py-tst-001--run-pytest-with-coverage-and-junit-reports-in-ci) | Run pytest with coverage and JUnit reports in CI | MUST |
+| [PY-TST-002](rules/python/testing.md#py-tst-002--test-against-ephemeral-services-and-fixtures-never-shared-databases) | Test against ephemeral services and fixtures, never shared databases | MUST |
+| [TF-K8S-001](rules/terraform.md#tf-k8s-001--http-deployments-declare-startup-readiness-and-liveness-probes) | HTTP deployments declare startup, readiness and liveness probes | MUST |
+| [TF-K8S-002](rules/terraform.md#tf-k8s-002--probe-celery-workers-with-the-heartbeat-file) | Probe Celery workers with the heartbeat file | MUST |
+| [TF-K8S-003](rules/terraform.md#tf-k8s-003--roll-out-with-max_unavailable--0-and-max_surge--1) | Roll out with `max_unavailable = 0` and `max_surge = 1` | MUST |
+| [CI-PIP-001](rules/ci.md#ci-pip-001--run-the-pipeline-stages-in-order-each-gating-the-next) | Run the pipeline stages in order, each gating the next | MUST |
+| [CI-PIP-002](rules/ci.md#ci-pip-002--tests-gate-the-deploy) | Tests gate the deploy | MUST |
+| [CI-PIP-003](rules/ci.md#ci-pip-003--smoke-test-the-image-before-pushing-it) | Smoke-test the image before pushing it | MUST |
+| [CI-PIP-004](rules/ci.md#ci-pip-004--deploy-the-image-tagged-with-the-commit-sha) | Deploy the image tagged with the commit SHA | MUST |
+| [CI-DPL-001](rules/ci.md#ci-dpl-001--verify-the-rollout-after-deploy-and-roll-back-on-failure) | Verify the rollout after deploy and roll back on failure | MUST |
 
 Supporting material:
 
@@ -48,7 +81,8 @@ Format: `<SCOPE>-<TOPIC>-<NNN>`.
 
 - Scope: 2–3 letters. `GEN`, `PY`, `TS`, `TF`, `DKR`, `SH`, `CSS`, `CI`.
 - Topic: 3 letters. `CMT` comments, `CFG` configuration, `LOG` logging, `OBS` observability, `RUN` runtime, `CEL`
-  Celery, `DEP` dependencies, `NAM` names, `STY` formatting, `TST` tests, `K8S` Kubernetes, `SEC` secrets.
+  Celery, `DEP` dependencies, `NAM` names, `STY` formatting, `TST` tests, `K8S` Kubernetes, `SEC` secrets, `PIP`
+  pipeline, `DPL` deploy.
 - Number: 3 digits.
 
 Properties:

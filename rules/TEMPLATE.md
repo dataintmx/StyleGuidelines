@@ -4,7 +4,7 @@
 - **Applies to:** services | workers | libraries | all Python repos
 - **Enforced by:** `ruff B006` | `scripts/check-no-comments.py` | code review
 - **Why:** one or two sentences, with the incident or standard that justifies it.
-- **Source:** `docs/standards/…` (T-number) or incident date.
+- **Source:** generic origin, e.g. "Internal runtime standard" or "Internal incident, 2026". No task numbers, paths or links to internal docs.
 
 Correct:
 ```python
