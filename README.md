@@ -61,6 +61,7 @@ people and by coding agents: every rule has a stable ID, a level and, whenever p
 | [TS-NAM-001](rules/typescript.md#ts-nam-001--follow-the-naming-and-export-conventions) | Follow the naming and export conventions | MUST |
 | [TS-INT-001](rules/typescript.md#ts-int-001--key-translations-by-namespace-and-update-every-locale) | Key translations by namespace and update every locale | MUST |
 | [TS-SEC-001](rules/typescript.md#ts-sec-001--supply-secrets-and-environment-values-through-environment-variables) | Supply secrets and environment values through environment variables | MUST |
+| [TS-SEC-002](rules/typescript.md#ts-sec-002--never-put-secrets-in-next_public_-variables) | Never put secrets in `NEXT_PUBLIC_*` variables | MUST |
 | [TS-TST-001](rules/typescript.md#ts-tst-001--pass-the-quality-gates-before-opening-a-pull-request) | Pass the quality gates before opening a pull request | MUST |
 | [TF-K8S-001](rules/terraform.md#tf-k8s-001--http-deployments-declare-startup-readiness-and-liveness-probes) | HTTP deployments declare startup, readiness and liveness probes | MUST |
 | [TF-K8S-002](rules/terraform.md#tf-k8s-002--probe-celery-workers-with-the-heartbeat-file) | Probe Celery workers with the heartbeat file | MUST |

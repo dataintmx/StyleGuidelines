@@ -16,6 +16,7 @@ internationalization, secrets and quality gates.
 | [TS-NAM-001](#ts-nam-001--follow-the-naming-and-export-conventions) | Follow the naming and export conventions | MUST |
 | [TS-INT-001](#ts-int-001--key-translations-by-namespace-and-update-every-locale) | Key translations by namespace and update every locale | MUST |
 | [TS-SEC-001](#ts-sec-001--supply-secrets-and-environment-values-through-environment-variables) | Supply secrets and environment values through environment variables | MUST |
+| [TS-SEC-002](#ts-sec-002--never-put-secrets-in-next_public_-variables) | Never put secrets in `NEXT_PUBLIC_*` variables | MUST |
 | [TS-TST-001](#ts-tst-001--pass-the-quality-gates-before-opening-a-pull-request) | Pass the quality gates before opening a pull request | MUST |
 
 ### TS-STY-001 — Format with the shared Prettier configuration
@@ -340,6 +341,31 @@ const apiKey = "example-secret";
 const apiBaseUrl = "https://api.example.com";
 
 console.log("token", apiKey);
+```
+
+### TS-SEC-002 — Never put secrets in `NEXT_PUBLIC_*` variables
+
+- **Level:** MUST
+- **Applies to:** Next.js repos
+- **Enforced by:** code review; secret scanning
+- **Why:** Next.js inlines every `NEXT_PUBLIC_*` value into the JavaScript sent to the browser, so anyone can read it. Only values that are public by design use that prefix, such as base URLs or browser keys restricted by origin. A key that must stay private is read on the server without the prefix, and the browser calls a route handler.
+- **Source:** Shared frontend conventions.
+
+Correct:
+```typescript
+export const GET = async () => {
+    const response = await fetch("https://api.example.com/v1/items", {
+        headers: { Authorization: `Bearer ${process.env.ITEMS_API_KEY}` },
+    });
+    return Response.json(await response.json());
+};
+```
+
+Incorrect:
+```typescript
+const response = await fetch("https://api.example.com/v1/items", {
+    headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_ITEMS_API_KEY}` },
+});
 ```
 
 ### TS-TST-001 — Pass the quality gates before opening a pull request

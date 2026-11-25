@@ -16,7 +16,7 @@ Phase 2, first batch.
 
 Phase 2, second batch (TypeScript).
 
-- Added `TS-STY-001`, `TS-STY-002`, `TS-CFG-001`, `TS-LNT-001`, `TS-TYP-001`, `TS-TYP-002`, `TS-ARC-001`, `TS-ARC-002`, `TS-NAM-001`, `TS-INT-001`, `TS-SEC-001`, `TS-TST-001`.
+- Added `TS-STY-001`, `TS-STY-002`, `TS-CFG-001`, `TS-LNT-001`, `TS-TYP-001`, `TS-TYP-002`, `TS-ARC-001`, `TS-ARC-002`, `TS-NAM-001`, `TS-INT-001`, `TS-SEC-001`, `TS-SEC-002`, `TS-TST-001`.
 - New topic codes `LNT` (lint), `TYP` (types), `ARC` (architecture) and `INT` (internationalization) in the root README.
 
 ## 2026-11-23
